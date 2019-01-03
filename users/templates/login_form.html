@@ -1,0 +1,27 @@
+{% load widget_tweaks %}
+{% load i18n %}
+
+<form class="form-group d-flex flex-column" action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <h3>{% trans 'Login' %}</h3>
+
+    {% if login_form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for error in login_form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% for field in login_form.visible_fields%}
+        <span class="mt-2">{{ field.label }}</span>
+        {% render_field field class="form-control" %}
+    {% endfor %}
+
+    <div class="container-fluid p-0 mt-3">
+        <div class="row m-0">
+            <input class="col-12 col-md btn-primary p-2" type="submit" value="{% trans 'Login' %}">
+            <a href="{% url 'signup' %}" class="col-12 col-md btn-link btn-block p-2 text-center">{% trans 'Don&#39;t have an account?' %}</a>
+        </div>
+    </div>
+</form>

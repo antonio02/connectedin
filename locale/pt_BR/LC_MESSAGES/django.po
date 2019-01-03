@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-03 19:38+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: connectedin/settings.py:124
+msgid "English"
+msgstr ""
+
+#: connectedin/settings.py:125
+msgid "Brazilian portuguese"
+msgstr "Português do Brasil"
+
+#: templates/nav_header.html:9
+msgid "Home"
+msgstr "Início"
+
+#: templates/nav_header.html:10 users/templates/login.html:5
+#: users/templates/login_form.html:6 users/templates/login_form.html:23
+msgid "Login"
+msgstr "Entrar"
+
+#: templates/nav_header.html:11 users/templates/signup.html:5
+#: users/templates/signup_form.html:5
+msgid "Sign Up"
+msgstr "Cadastre-se"
+
+#: users/forms.py:18
+msgid "First name"
+msgstr "Nome"
+
+#: users/forms.py:19
+msgid "Last name"
+msgstr "Sobrenome"
+
+#: users/forms.py:20 users/forms.py:97
+msgid "Username"
+msgstr "Nome de Usuario"
+
+#: users/forms.py:21
+msgid "Email"
+msgstr "Email"
+
+#: users/forms.py:22 users/forms.py:98
+msgid "Password"
+msgstr "Senha"
+
+#: users/forms.py:23
+msgid "Confirm password"
+msgstr "Confirme a senha"
+
+#: users/forms.py:42
+#, python-format
+msgid "Username \"%(username)s\" is already in use."
+msgstr "O nome de usuario \"%(username)s\" já esta sendo usado"
+
+#: users/forms.py:50
+msgid "Passwords does not match"
+msgstr "As senhas não são iguais"
+
+#: users/forms.py:65
+msgid "Date of birth"
+msgstr "Data de nascimento"
+
+#: users/forms.py:84
+msgid "You must be over 13 years old"
+msgstr "Você deve ter mais de 13 anos"
+
+#: users/forms.py:107
+msgid "Wrong username or password"
+msgstr "Nome de usuario ou senha errados"
+
+#: users/templates/login_form.html:24
+msgid "Don&#39;t have an account?"
+msgstr "Não tem um conta?"
+
+#: users/templates/signup_form.html:63
+msgid "Create Account"
+msgstr "Criar Conta"
+
+#: users/templates/signup_form.html:64
+msgid "Already have an account?"
+msgstr "Já tem uma conta?"
