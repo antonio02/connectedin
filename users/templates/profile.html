@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+
+<title>{{profile.user.first_name}}</title>
+    
+{% endblock title %}
+
+
+{% block body %}
+
+{% if user.username == profile.user.username %}
+    <h1>Meu Perfil</h1>
+{% else %}
+    <h1>Outro Perfil</h1>
+{% endif %}
+
+{% endblock body %}
+    
+    

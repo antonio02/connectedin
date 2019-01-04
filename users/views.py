@@ -1,27 +1,45 @@
 from django.shortcuts import render, redirect
-from .forms import *
+from .forms import NewProfileForm, NewUserForm, UserLoginForm
+from .models import Profile
 from django.views.generic.base import View
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from .decorators import require_anon
+from django.utils.decorators import method_decorator
+from django.contrib.auth import authenticate, login, logout as django_logout
+from django.contrib.auth.models import User
 
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html', {'user': request.user})
+    return render(request, 'index.html')
+
+def profile(request, username):
+	try:
+		profile = Profile.objects.get(user=User.objects.get(username=username))
+		return render(request, 'profile.html', {'profile': profile})
+	except User.DoesNotExist or Profile.DoesNotExist:
+		return render(request, 'not_found.html')
+
+@login_required
+def logout(request):
+	django_logout(request)
+	return redirect(index)
 
 class SignUpView(View):
 
 	template_name = 'signup.html'
-
+	
 	def render_form(self, request):
 		return render(request, self.template_name, {
 			'profile_form'	: NewProfileForm(),
 			'user_form'	    : NewUserForm()
 			})
 
+	@method_decorator(require_anon)
 	def get(self, request):
 		return self.render_form(request)
 
+	@method_decorator(require_anon)
 	def post(self, request):
 		profile_form 	= NewProfileForm(request.POST)
 		user_form 	    = NewUserForm(request.POST)
@@ -44,11 +62,13 @@ class LoginView(View):
 
 	template_name = 'login.html'
 
+	@method_decorator(require_anon)
 	def get(self, request):
 		return render(request, self.template_name, {
 			'login_form'	: UserLoginForm(),
 			})
 
+	@method_decorator(require_anon)
 	def post(self, request):
 		login_form = UserLoginForm(request.POST)
 

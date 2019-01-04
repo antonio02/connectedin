@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-03 19:38+0000\n"
+"POT-Creation-Date: 2019-01-03 23:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,16 +26,24 @@ msgstr ""
 msgid "Brazilian portuguese"
 msgstr "Português do Brasil"
 
-#: templates/nav_header.html:9
+#: templates/nav_header.html:13
+msgid "My Profile"
+msgstr "Meu Perfil"
+
+#: templates/nav_header.html:14
+msgid "Logout"
+msgstr "Sair"
+
+#: templates/nav_header.html:24
 msgid "Home"
 msgstr "Início"
 
-#: templates/nav_header.html:10 users/templates/login.html:5
+#: templates/nav_header.html:25 users/templates/login.html:5
 #: users/templates/login_form.html:6 users/templates/login_form.html:23
 msgid "Login"
 msgstr "Entrar"
 
-#: templates/nav_header.html:11 users/templates/signup.html:5
+#: templates/nav_header.html:26 users/templates/signup.html:5
 #: users/templates/signup_form.html:5
 msgid "Sign Up"
 msgstr "Cadastre-se"
