@@ -1,0 +1,10 @@
+#profile-thumbnail {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+#profile_container{
+    max-width: 1080px;
+    background-color: white;
+}

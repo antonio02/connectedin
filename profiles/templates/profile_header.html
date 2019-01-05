@@ -1,0 +1,27 @@
+{% load i18n %}
+
+<div id="profile_container" class="row mr-auto ml-auto">
+    <div class="col-12 m-0 d-flex flex-column align-items-center p-2">
+        <img id="profile-thumbnail" src="https://picsum.photos/150/?random" class="img-thumbnail">
+        <h4 class="pt-2">{{profile.user.get_full_name}}</h4>
+        
+        {% if request.user.is_authenticated and request.user.username != profile.user.username %}
+        <div class="btn-group">
+            {% if friendship == 0 %}
+                <a href="{% url 'invite_profile' profile.user.username %}" class="btn btn-success mb-2">{% trans 'Invite' %}</a>
+            {% elif friendship == 1 %}
+                <a href="#" class="btn btn-outline-danger mb-2">{% trans 'Cancel invitation' %}</a>
+            {% elif friendship == 2 %}
+                <a href="#" class="btn btn-outline-success mb-2 mr-2">{% trans 'Accept invitation' %}</a>
+                <a href="#" class="btn btn-outline-danger mb-2">{% trans 'Decline invitation' %}</a>
+            {% elif friendship == 3 %}
+                <a href="#" class="btn btn-danger mb-2">{% trans 'Remove from contacts' %}</a>
+            {% endif %}
+        </div>
+        {% endif %}
+            
+    </div>
+
+    <div class="col-12 bg-info p-3">
+    </div>
+</div>
