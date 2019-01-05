@@ -1,24 +1,17 @@
 from django.shortcuts import render, redirect
-from .forms import NewProfileForm, NewUserForm, UserLoginForm
-from .models import Profile
+from .forms import NewUserForm, UserLoginForm
 from django.views.generic.base import View
 from django.contrib.auth.decorators import login_required
 from .decorators import require_anon
 from django.utils.decorators import method_decorator
 from django.contrib.auth import authenticate, login, logout as django_logout
 from django.contrib.auth.models import User
+from profiles.forms import NewProfileForm
 
 # Create your views here.
 
 def index(request):
     return render(request, 'index.html')
-
-def profile(request, username):
-	try:
-		profile = Profile.objects.get(user=User.objects.get(username=username))
-		return render(request, 'profile.html', {'profile': profile})
-	except User.DoesNotExist or Profile.DoesNotExist:
-		return render(request, 'not_found.html')
 
 @login_required
 def logout(request):
