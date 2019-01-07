@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class NewUserForm(forms.ModelForm):
-    retype_password = forms.CharField(required=True, 
+    retype_password = forms.CharField(required=True,
     widget=forms.PasswordInput(), max_length=128)
 
     def __init__(self, *args, **kwargs):
@@ -44,6 +44,8 @@ class NewUserForm(forms.ModelForm):
     def clean(self):
 
         if self.cleaned_data['password'] != self.cleaned_data['retype_password']:
+            self.add_error('password',
+                forms.ValidationError(''))
             self.add_error('retype_password',
                 forms.ValidationError(_('Passwords does not match'), code='password_not_match'))
         return super(NewUserForm, self).clean()
@@ -79,4 +81,25 @@ class UserLoginForm(forms.Form):
                 raise forms.ValidationError(_('Wrong username or password'), code='wrong_login')
         
         return super(UserLoginForm, self).clean()
+
+class ChangePasswordForm(forms.Form):
+    old_password    = forms.CharField(widget=forms.PasswordInput, required=True, max_length=128)
+    password        = forms.CharField(widget=forms.PasswordInput, required=True, max_length=128)
+    retype_password = forms.CharField(widget=forms.PasswordInput, required=True, max_length=128)
+
     
+    def __init__(self, *args, **kwargs):
+        super(ChangePasswordForm, self).__init__(*args, **kwargs)
+
+        self.fields['old_password'].label   = _('Old Password')
+        self.fields['password'].label       = _('New password')
+        self.fields['retype_password'].label= _('Confirm password')
+
+    def clean(self):
+
+        if self.cleaned_data['password'] != self.cleaned_data['retype_password']:
+            self.add_error('password',
+                forms.ValidationError(''))
+            self.add_error('retype_password',
+                forms.ValidationError(_('Passwords does not match'), code='password_not_match'))
+        return super(ChangePasswordForm, self).clean()

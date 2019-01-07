@@ -1,27 +1,53 @@
 {% load i18n %}
 
-<div id="profile_container" class="row mr-auto ml-auto">
-    <div class="col-12 m-0 d-flex flex-column align-items-center p-2">
+
+<div id="profile-cover" class="col-12 m-0 d-flex flex-column p-2">
+    <div id="profile-card" class="card p-3 align-items-center m-auto">
+        {% if profile.user.is_superuser %} 
+            <span class="badge badge-primary mb-2">Admin</span>
+        {% else %}
+            <span style="visibility: hidden;" class="badge badge-primary">Admin</span>
+        {% endif %}
+
+        <div style="right: 0; top: 0;" class="position-absolute dropdown show">
+                <a class="btn btn-sm dropdown-toggle" 
+                href="" role="button" id="dropdownProfileOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+            
+                <div class="dropdown-menu position-absolute dropdown-menu-right" aria-labelledby="dropdownProfileOptions">
+                    <a class="dropdown-item" href="#">{% trans 'Block' %}</a>
+                    
+                    {% if request.user.is_superuser and not profile.user.is_superuser %}
+                        <div class="dropdown-divider"></div>
+                        <a onclick="call_url('{% url 'give_super' profile.user.username %}')"
+                        class="dropdown-item" href="#">{% trans 'Give admin' %}</a>
+                    {% endif %}
+                </div>
+            </div>
+
         <img id="profile-thumbnail" src="https://picsum.photos/150/?random" class="img-thumbnail">
-        <h4 class="pt-2">{{profile.user.get_full_name}}</h4>
-        
-        {% if request.user.is_authenticated and request.user.username != profile.user.username %}
+        <h4 class="pt-2">{{profile.user.get_full_name}}</h4>        
+
+        {% if request.user.is_authenticated and friendship is not None %}
         <div class="btn-group">
             {% if friendship == 0 %}
-                <a href="{% url 'invite_profile' profile.user.username %}" class="btn btn-success mb-2">{% trans 'Invite' %}</a>
+                <button onclick="call_url('{% url 'invite_profile' profile.user.username %}')"
+                class="btn btn-success mb-2 btn-sm">{% trans 'Invite' %}</button>
             {% elif friendship == 1 %}
-                <a href="#" class="btn btn-outline-danger mb-2">{% trans 'Cancel invitation' %}</a>
+                <button onclick="call_url('{% url 'cancel_invitation' invitation.id %}')"
+                class="btn btn-danger mb-2 btn-sm">{% trans 'Cancel invitation' %}</button>
             {% elif friendship == 2 %}
-                <a href="#" class="btn btn-outline-success mb-2 mr-2">{% trans 'Accept invitation' %}</a>
-                <a href="#" class="btn btn-outline-danger mb-2">{% trans 'Decline invitation' %}</a>
+                <button onclick="call_url('{% url 'accept_invitation' invitation.id %}')"
+                class="btn btn-success mb-2 mr-2 btn-sm">{% trans 'Accept invitation' %}</button>
+                <button onclick="call_url('{% url 'decline_invitation' invitation.id %}')"
+                class="btn btn-danger mb-2 btn-sm">{% trans 'Decline invitation' %}</button>
             {% elif friendship == 3 %}
-                <a href="#" class="btn btn-danger mb-2">{% trans 'Remove from contacts' %}</a>
+                <button onclick="call_url('{% url 'remove_contact' profile.user.username %}')"
+                class="btn btn-danger mb-2 btn-sm">{% trans 'Remove from contacts' %}</button>
             {% endif %}
         </div>
         {% endif %}
-            
-    </div>
+    </div>    
+</div>
 
-    <div class="col-12 bg-info p-3">
-    </div>
+<div class="col-12 bg-info p-3">
 </div>

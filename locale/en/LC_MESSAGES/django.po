@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-03 23:10+0000\n"
+"POT-Creation-Date: 2019-01-06 02:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,79 +18,124 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: connectedin/settings.py:124
+#: connectedin/settings.py:125
 msgid "English"
 msgstr ""
 
-#: connectedin/settings.py:125
+#: connectedin/settings.py:126
 msgid "Brazilian portuguese"
+msgstr ""
+
+#: profiles/forms.py:10
+msgid "Date of birth"
+msgstr ""
+
+#: profiles/forms.py:29
+msgid "You must be over 13 years old"
+msgstr ""
+
+#: profiles/templates/profile_header.html:12
+msgid "Invite"
+msgstr ""
+
+#: profiles/templates/profile_header.html:14
+msgid "Cancel invitation"
+msgstr ""
+
+#: profiles/templates/profile_header.html:16
+msgid "Accept invitation"
+msgstr ""
+
+#: profiles/templates/profile_header.html:17
+msgid "Decline invitation"
+msgstr ""
+
+#: profiles/templates/profile_header.html:19
+msgid "Remove from contacts"
 msgstr ""
 
 #: templates/nav_header.html:13
 msgid "My Profile"
 msgstr ""
 
-#: templates/nav_header.html:14
+#: templates/nav_header.html:15 users/templates/change_password.html:5
+#: users/templates/change_password_form.html:6
+msgid "Change Password"
+msgstr ""
+
+#: templates/nav_header.html:16
 msgid "Logout"
 msgstr ""
 
-#: templates/nav_header.html:24
+#: templates/nav_header.html:26
 msgid "Home"
 msgstr ""
 
-#: templates/nav_header.html:25 users/templates/login.html:5
+#: templates/nav_header.html:27 users/templates/login.html:5
 #: users/templates/login_form.html:6 users/templates/login_form.html:23
 msgid "Login"
 msgstr ""
 
-#: templates/nav_header.html:26 users/templates/signup.html:5
+#: templates/nav_header.html:28 users/templates/signup.html:5
 #: users/templates/signup_form.html:5
 msgid "Sign Up"
 msgstr ""
 
-#: users/forms.py:18
+#: templates/not_found.html:5
+msgid "Not Found"
+msgstr ""
+
+#: users/forms.py:16
 msgid "First name"
 msgstr ""
 
-#: users/forms.py:19
+#: users/forms.py:17
 msgid "Last name"
 msgstr ""
 
-#: users/forms.py:20 users/forms.py:97
+#: users/forms.py:18 users/forms.py:69
 msgid "Username"
 msgstr ""
 
-#: users/forms.py:21
+#: users/forms.py:19
 msgid "Email"
 msgstr ""
 
-#: users/forms.py:22 users/forms.py:98
+#: users/forms.py:20 users/forms.py:70
 msgid "Password"
 msgstr ""
 
-#: users/forms.py:23
+#: users/forms.py:21 users/forms.py:94
 msgid "Confirm password"
 msgstr ""
 
-#: users/forms.py:42
+#: users/forms.py:40
 #, python-format
 msgid "Username \"%(username)s\" is already in use."
 msgstr ""
 
-#: users/forms.py:50
+#: users/forms.py:48 users/forms.py:100
 msgid "Passwords does not match"
 msgstr ""
 
-#: users/forms.py:65
-msgid "Date of birth"
-msgstr ""
-
-#: users/forms.py:84
-msgid "You must be over 13 years old"
-msgstr ""
-
-#: users/forms.py:107
+#: users/forms.py:79
 msgid "Wrong username or password"
+msgstr ""
+
+#: users/forms.py:92
+msgid "Old Password"
+msgstr ""
+
+#: users/forms.py:93
+msgid "New password"
+msgstr ""
+
+#: users/templates/change_password_form.html:36
+msgid "Finish"
+msgstr ""
+
+#: users/templates/change_password_form.html:37
+msgid "Back to profile"
 msgstr ""
 
 #: users/templates/login_form.html:24
@@ -103,4 +148,8 @@ msgstr ""
 
 #: users/templates/signup_form.html:64
 msgid "Already have an account?"
+msgstr ""
+
+#: users/views.py:102 users/views.py:108
+msgid "Old password is incorrect"
 msgstr ""

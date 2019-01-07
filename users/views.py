@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
-from .forms import NewUserForm, UserLoginForm
+from .forms import NewUserForm, UserLoginForm, ChangePasswordForm
 from django.views.generic.base import View
 from django.contrib.auth.decorators import login_required
 from .decorators import require_anon
 from django.utils.decorators import method_decorator
-from django.contrib.auth import authenticate, login, logout as django_logout
+from django.contrib.auth import authenticate, login, logout as django_logout, update_session_auth_hash
 from django.contrib.auth.models import User
 from profiles.forms import NewProfileForm
+from django.utils.translation import ugettext_lazy as _
+from profiles.views import profile
 
 # Create your views here.
 
@@ -74,4 +76,36 @@ class LoginView(View):
 		
 		return render(request, self.template_name, {
 			'login_form'	: login_form,
+			})
+
+class ChangePasswordView(View):
+
+	template_name = 'change_password.html'
+
+	@method_decorator(login_required)
+	def get(self, request):
+		return render(request, self.template_name, {
+			'change_form'	: ChangePasswordForm(),
+			})
+
+	@method_decorator(login_required)
+	def post(self, request):
+		change_form = ChangePasswordForm(request.POST)
+		user = request.user
+		if change_form.is_valid():
+			if user.check_password(change_form.cleaned_data['old_password']):
+				user.set_password(change_form.cleaned_data['password'])
+				user.save()
+				update_session_auth_hash(request, user)
+				return redirect(profile, username=user.username)
+			else:
+				change_form.add_error('old_password', _('Old password is incorrect'))
+				return render(request, self.template_name, {
+				'change_form'	: change_form,
+				})
+
+		if not user.check_password(change_form.cleaned_data['old_password']):
+			change_form.add_error('old_password', _('Old password is incorrect'))
+		return render(request, self.template_name, {
+			'change_form'	: change_form,
 			})
