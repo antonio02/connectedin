@@ -10,7 +10,7 @@
         {% endif %}
 
         
-        {% if request.user.is_authenticated %}
+        {% if request.user.is_authenticated and request.user.username != profile.user.username %}
             <div style="right: 0; top: 0;" class="position-absolute dropdown show">
                 <a class="btn dropdown-toggle" 
                 href="" role="button" id="dropdownProfileOptions" 
