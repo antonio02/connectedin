@@ -8,6 +8,7 @@ class Profile(models.Model):
     user            = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     date_of_birth   = models.DateField(null=False, blank=False)
     contacts        = models.ManyToManyField('Profile')
+    blocked_contacts= models.ManyToManyField('Profile', related_name='%(class)s_blocked_contacts')
 
 class Invitation(models.Model):
     sender      = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='received_invitations' )

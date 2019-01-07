@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-06 02:42+0000\n"
+"POT-Creation-Date: 2019-01-07 02:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,23 +34,35 @@ msgstr "Data de nascimento"
 msgid "You must be over 13 years old"
 msgstr "Você deve ter mais de 13 anos"
 
-#: profiles/templates/profile_header.html:12
+#: profiles/templates/profile_header.html:17
+msgid "Are you sure?"
+msgstr "Tem certeza?"
+
+#: profiles/templates/profile_header.html:18
+msgid "Block"
+msgstr "Bloquear"
+
+#: profiles/templates/profile_header.html:23
+msgid "Give admin"
+msgstr "Tornar admin"
+
+#: profiles/templates/profile_header.html:35
 msgid "Invite"
 msgstr "Convidar"
 
-#: profiles/templates/profile_header.html:14
+#: profiles/templates/profile_header.html:38
 msgid "Cancel invitation"
 msgstr "Cancelar convite"
 
-#: profiles/templates/profile_header.html:16
+#: profiles/templates/profile_header.html:41
 msgid "Accept invitation"
 msgstr "Aceitar convite"
 
-#: profiles/templates/profile_header.html:17
+#: profiles/templates/profile_header.html:43
 msgid "Decline invitation"
 msgstr "Rejeitar convite"
 
-#: profiles/templates/profile_header.html:19
+#: profiles/templates/profile_header.html:46
 msgid "Remove from contacts"
 msgstr "Remover dos contatos"
 
@@ -93,7 +105,7 @@ msgstr "Nome"
 msgid "Last name"
 msgstr "Sobrenome"
 
-#: users/forms.py:18 users/forms.py:69
+#: users/forms.py:18 users/forms.py:71
 msgid "Username"
 msgstr "Nome de Usuario"
 
@@ -101,11 +113,11 @@ msgstr "Nome de Usuario"
 msgid "Email"
 msgstr "Email"
 
-#: users/forms.py:20 users/forms.py:70
+#: users/forms.py:20 users/forms.py:72
 msgid "Password"
 msgstr "Senha"
 
-#: users/forms.py:21 users/forms.py:94
+#: users/forms.py:21 users/forms.py:96
 msgid "Confirm password"
 msgstr "Confirme a senha"
 
@@ -114,19 +126,19 @@ msgstr "Confirme a senha"
 msgid "Username \"%(username)s\" is already in use."
 msgstr "O nome de usuario \"%(username)s\" já esta sendo usado"
 
-#: users/forms.py:48 users/forms.py:100
+#: users/forms.py:50 users/forms.py:104
 msgid "Passwords does not match"
 msgstr "As senhas não são iguais"
 
-#: users/forms.py:79
+#: users/forms.py:81
 msgid "Wrong username or password"
 msgstr "Nome de usuario ou senha errados"
 
-#: users/forms.py:92
+#: users/forms.py:94
 msgid "Old Password"
 msgstr "Senha antiga"
 
-#: users/forms.py:93
+#: users/forms.py:95
 msgid "New password"
 msgstr "Nova Senha"
 
