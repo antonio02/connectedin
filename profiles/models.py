@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django import template
+
+register = template.Library()
 
 # Create your models here.
-
 
 class Profile(models.Model):
     user            = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
@@ -10,9 +12,13 @@ class Profile(models.Model):
     contacts        = models.ManyToManyField('Profile')
     blocked_contacts= models.ManyToManyField('Profile', related_name='%(class)s_blocked_contacts')
 
+    def invited_profiles(self):
+        return [i.receiver for i in self.sent_invitations.all()]
+
+
 class Invitation(models.Model):
-    sender      = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='received_invitations' )
-    receiver    = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='sent_invitations')
+    sender      = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='sent_invitations' )
+    receiver    = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='received_invitations')
 
     def accept(self):
         self.sender.contacts.add(self.receiver)

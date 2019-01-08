@@ -10,3 +10,9 @@ function call_url(url) {
       }
     })
 }
+
+
+function search(url) {
+    var key = $('#search-key').val();
+    window.open(url + key, '_self');
+}
