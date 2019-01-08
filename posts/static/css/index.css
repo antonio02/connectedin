@@ -1,0 +1,12 @@
+#new-post-card{
+    z-index: 1;
+}
+
+.bg-white{
+    background-color: white;
+}
+
+#post-profile-thumbnail{
+    width: 50px;
+    height: 50px;
+}

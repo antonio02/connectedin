@@ -1,0 +1,21 @@
+{% load widget_tweaks %}
+{% load i18n %}
+
+<form id="new-post-form" class="form-group row m-0 justify-content-end" 
+action="{% url 'new_post' %}" method="post">
+    {% csrf_token %}
+    <h3 class="col-12">{% trans 'New Post' %}</h3>
+
+    {% if post_form.non_field_errors %}
+        <div class="col-12 alert alert-danger" role="alert">
+            {% for error in post_form.non_field_errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% render_field post_form.post_text class="form-control col-12" rows="3" %}
+
+    <input class="btn btn-primary mt-2 col-6" type="submit" value="{% trans 'Publish' %}">
+
+</form>

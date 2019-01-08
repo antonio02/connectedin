@@ -22,8 +22,8 @@
                     
                     {% if request.user.is_superuser and not profile.user.is_superuser %}
                         <div class="dropdown-divider"></div>
-                        <a onclick="call_url('{% url 'give_super' profile.user.username %}')"
-                        class="dropdown-item" href="#">{% trans 'Give admin' %}</a>
+                        <button onclick="call_url('{% url 'give_super' profile.user.username %}')"
+                        class="btn dropdown-item">{% trans 'Give admin' %}</button>
                     {% endif %}
                 </div>
             </div>

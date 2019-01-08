@@ -10,9 +10,3 @@ function call_url(url) {
       }
     })
 }
-
-function block_alert(e) {
-    if(!confirm("Are you sure?")){
-        e.preventDefault();
-    }
-}

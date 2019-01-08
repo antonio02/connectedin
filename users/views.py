@@ -12,13 +12,10 @@ from profiles.views import profile
 
 # Create your views here.
 
-def index(request):
-    return render(request, 'index.html')
-
 @login_required
 def logout(request):
 	django_logout(request)
-	return redirect(index)
+	return redirect('index')
 
 class SignUpView(View):
 
