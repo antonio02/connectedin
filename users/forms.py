@@ -103,19 +103,3 @@ class ChangePasswordForm(forms.Form):
             self.add_error('retype_password',
                 forms.ValidationError(_('Passwords does not match'), code='password_not_match'))
         return super(ChangePasswordForm, self).clean()
-
-class RecoverPasswordFrom(forms.Form):
-    email = forms.EmailField(required=False)
-
-    def __init__(self, *args, **kwargs):
-        super(RecoverPasswordFrom, self).__init__(*args, **kwargs)
-
-        self.fields['email'].label = _('Email')
-
-    def clean(self):
-
-        email = self.cleaned_data['email']
-        if not User.objects.filter(email=email).exists:
-            raise forms.ValidationError(_('Email does not exist'),
-            params={'email': email}, code='email_not_exist')
-        return email

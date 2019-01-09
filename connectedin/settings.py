@@ -28,8 +28,13 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['192.168.0.12']
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com' # serviço de e-mail smtp
+EMAIL_HOST_USER = 'conectedintrabalho@gmail.com' # ID do email
+EMAIL_HOST_PASSWORD = 'projetofinal' #password
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 # Application definition
 

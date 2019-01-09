@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import NewUserForm, UserLoginForm, ChangePasswordForm, RecoverPasswordFrom
+from .forms import NewUserForm, UserLoginForm, ChangePasswordForm
 from django.views.generic.base import View
 from django.contrib.auth.decorators import login_required
 from .decorators import require_anon
@@ -75,15 +75,6 @@ class LoginView(View):
 			'login_form'	: login_form,
 			})
 
-class RecoverView(View):
-
-	template_name = 'recover_password.html'
-
-	@method_decorator(require_anon)
-	def get(self, request):
-		return render(request, self.template_name, {
-			'recover_form'	: RecoverPasswordFrom(),
-			})
 
 class ChangePasswordView(View):
 
