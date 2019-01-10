@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-07 02:49+0000\n"
+"POT-Creation-Date: 2019-01-10 04:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: connectedin/settings.py:125
+#: connectedin/settings.py:131
 msgid "English"
 msgstr ""
 
-#: connectedin/settings.py:126
+#: connectedin/settings.py:132
 msgid "Brazilian portuguese"
 msgstr "Português do Brasil"
+
+#: posts/forms.py:9 posts/templates/forms/new_post_form.html:7
+msgid "New Post"
+msgstr "Nova Publicação"
+
+#: posts/templates/forms/new_post_form.html:19
+msgid "Publish"
+msgstr "Publicar"
+
+#: posts/templates/layouts/post_layout.html:16
+#: profiles/templates/profile_header.html:20
+msgid "Are you sure?"
+msgstr "Tem certeza?"
+
+#: posts/templates/layouts/post_layout.html:18
+msgid "Delete"
+msgstr "Apagar"
+
+#: posts/templates/layouts/post_layout.html:23
+#, python-format
+msgid "Profile picture of %(name)s"
+msgstr "Foto de perfil de %(name)s"
 
 #: profiles/forms.py:10
 msgid "Date of birth"
@@ -34,62 +56,83 @@ msgstr "Data de nascimento"
 msgid "You must be over 13 years old"
 msgstr "Você deve ter mais de 13 anos"
 
-#: profiles/templates/profile_header.html:17
-msgid "Are you sure?"
-msgstr "Tem certeza?"
-
-#: profiles/templates/profile_header.html:18
+#: profiles/templates/profile_header.html:21
 msgid "Block"
 msgstr "Bloquear"
 
-#: profiles/templates/profile_header.html:23
+#: profiles/templates/profile_header.html:26
 msgid "Give admin"
 msgstr "Tornar admin"
 
-#: profiles/templates/profile_header.html:35
+#: profiles/templates/profile_header.html:39
+#: searchs/templates/layouts/profile_layout.html:39
 msgid "Invite"
 msgstr "Convidar"
 
-#: profiles/templates/profile_header.html:38
+#: profiles/templates/profile_header.html:42
+#: searchs/templates/layouts/profile_layout.html:22
 msgid "Cancel invitation"
 msgstr "Cancelar convite"
 
-#: profiles/templates/profile_header.html:41
+#: profiles/templates/profile_header.html:45
+#: searchs/templates/layouts/profile_layout.html:31
 msgid "Accept invitation"
 msgstr "Aceitar convite"
 
-#: profiles/templates/profile_header.html:43
+#: profiles/templates/profile_header.html:47
+#: searchs/templates/layouts/profile_layout.html:33
 msgid "Decline invitation"
 msgstr "Rejeitar convite"
 
-#: profiles/templates/profile_header.html:46
+#: profiles/templates/profile_header.html:50
+#: searchs/templates/layouts/profile_layout.html:16
 msgid "Remove from contacts"
 msgstr "Remover dos contatos"
 
-#: templates/nav_header.html:13
+#: searchs/templates/search_results.html:5 templates/nav_header.html:12
+msgid "Search"
+msgstr "Pesquisar"
+
+#: searchs/templates/search_results.html:12
+msgid "Profiles"
+msgstr "Meu Perfil"
+
+#: searchs/templates/search_results.html:18
+msgid "No profiles found :("
+msgstr "Nenhum perfil encontrado :("
+
+#: templates/nav_header.html:17
+msgid "More options"
+msgstr "Mais opções"
+
+#: templates/nav_header.html:22
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/nav_header.html:15 users/templates/change_password.html:5
-#: users/templates/change_password_form.html:6
+#: templates/nav_header.html:23
+msgid "Timeline"
+msgstr "Linha do tempo"
+
+#: templates/nav_header.html:25 users/templates/change_password.html:5
+#: users/templates/forms/change_password_form.html:6
 msgid "Change Password"
 msgstr "Alterar senha"
 
-#: templates/nav_header.html:16
+#: templates/nav_header.html:26
 msgid "Logout"
 msgstr "Sair"
 
-#: templates/nav_header.html:26
+#: templates/nav_header.html:36
 msgid "Home"
 msgstr "Início"
 
-#: templates/nav_header.html:27 users/templates/login.html:5
-#: users/templates/login_form.html:6 users/templates/login_form.html:23
+#: templates/nav_header.html:37 users/templates/forms/login_form.html:6
+#: users/templates/forms/login_form.html:23 users/templates/login.html:5
 msgid "Login"
 msgstr "Entrar"
 
-#: templates/nav_header.html:28 users/templates/signup.html:5
-#: users/templates/signup_form.html:5
+#: templates/nav_header.html:38 users/templates/forms/signup_form.html:5
+#: users/templates/signup.html:5
 msgid "Sign Up"
 msgstr "Cadastre-se"
 
@@ -138,30 +181,71 @@ msgstr "Nome de usuario ou senha errados"
 msgid "Old Password"
 msgstr "Senha antiga"
 
-#: users/forms.py:95
+#: users/forms.py:95 users/templates/forms/password_reset_confirm_form.html:7
 msgid "New password"
 msgstr "Nova Senha"
 
-#: users/templates/change_password_form.html:36
+#: users/templates/forms/change_password_form.html:36
 msgid "Finish"
 msgstr "Finalizar"
 
-#: users/templates/change_password_form.html:37
+#: users/templates/forms/change_password_form.html:37
 msgid "Back to profile"
 msgstr "Voltar para perfil"
 
-#: users/templates/login_form.html:24
-msgid "Don&#39;t have an account?"
-msgstr "Não tem um conta?"
+#: users/templates/forms/login_form.html:24
+msgid "Forget your password?"
+msgstr "Esqueceu sua senha?"
 
-#: users/templates/signup_form.html:63
+#: users/templates/forms/password_reset_confirm_form.html:25
+msgid "Change"
+msgstr "Mudar"
+
+#: users/templates/forms/reset_password_form.html:6
+msgid "Reset your password"
+msgstr "Nova Senha"
+
+#: users/templates/forms/reset_password_form.html:16
+msgid "Send"
+msgstr "Enviar"
+
+#: users/templates/forms/signup_form.html:63
 msgid "Create Account"
 msgstr "Criar Conta"
 
-#: users/templates/signup_form.html:64
+#: users/templates/forms/signup_form.html:64
 msgid "Already have an account?"
 msgstr "Já tem uma conta?"
 
-#: users/views.py:102 users/views.py:108
+#: users/templates/password_reset_confirm.html:5
+msgid "Reset password"
+msgstr "Nova Senha"
+
+#: users/templates/password_reset_done.html:12
+msgid "Sent"
+msgstr "Enviado"
+
+#: users/templates/password_reset_done.html:13
+msgid ""
+"We will email you the instructions for resetting your password if there is "
+"an account with the email you provided. You will receive the message soon."
+msgstr ""
+"Nos iremos lhe enviar um email com as instruções para redefinir a sua senha "
+"caso exista uma conta com o email informado. Você ira receber a messagem em "
+"breve."
+
+#: users/templates/password_reset_done.html:14
+msgid ""
+"If you do not receive an email, please make sure you entered the address you "
+"used to register, and check your spam folder."
+msgstr ""
+"Se você não recebeu o email, verifique se você digitou o email que você usou "
+"para criar sua conta, e cheque a sua caixa de spam."
+
+#: users/templates/reset_password.html:5
+msgid "Recover password"
+msgstr "Nova Senha"
+
+#: users/views.py:100 users/views.py:106
 msgid "Old password is incorrect"
 msgstr "A senha antiga está incorreta"

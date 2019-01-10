@@ -1,0 +1,38 @@
+{% load i18n %}
+
+<div class="card mb-4">
+    <div class="card-body p-0">
+        <div class="d-flex flex-row align-items-center pt-3 pl-3 pr-3">
+
+            {% if request.user.username == post.profile.user.username %}
+                <div style="right: 0; top: 0;" class="position-absolute dropdown show">
+                    <button class="btn dropdown-toggle" aria-label="{% trans 'Post options' %}"
+                            role="button" id="dropdownPostOptions"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+
+
+                    <div class="dropdown-menu position-absolute dropdown-menu-right"
+                         aria-labelledby="dropdownPostOptions" >
+                        <button onclick="return confirm('{% trans 'Are you sure?' %}')?
+                                call_url('{% url 'delete_post' post.id %}') : ''"
+                                class="btn dropdown-item">{% trans 'Delete' %}</button>
+                    </div>
+                </div>
+            {% endif %}
+
+            <img alt="{% blocktrans with name=post.profile.user.get_full_name %}Profile picture of {{ name }}{% endblocktrans %}"
+                 src="https://picsum.photos/50/?random" class="img-thumbnail post-profile-thumbnail">
+            <div class="d-flex flex-column ml-3">
+                <a href="{% url 'profile' post.profile.user.username %}">
+                    <h4 class="card-title d-inline m-0">{{ post.profile.user.get_full_name }}</h4>
+                </a>
+                <span class="text-muted">{{ post.post_date }}</span>
+            </div>
+        </div>
+        <hr>
+        <div class="d-flex flex-row align-items-center pb-3 pl-3 pr-3">
+            <p class="card-text">{{ post.post_text }}</p>
+        </div>
+    </div>
+</div>

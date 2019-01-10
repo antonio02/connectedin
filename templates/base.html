@@ -1,18 +1,21 @@
 {% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
 <!DOCTYPE html>
-<html>
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="{% static 'js/vendor/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'js/vendor/popper.min.js' %}"></script>
-    <script src="{% static 'js/vendor/bootstrap.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/vendor/popper.min.js' %}" async></script>
+    <script src="{% static 'js/vendor/bootstrap.min.js' %}" async defer></script>
+    <script src="{% static 'js/main.js' %}" async></script>
     {% block title %}
     {% endblock title %}
+    <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
     {% include 'nav_header.html' %}

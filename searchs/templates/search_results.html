@@ -12,7 +12,7 @@
         <h2 class="p-3">{% trans 'Profiles' %}</h2>
         {% if profiles %}
             {% for profile in profiles %}
-                {% include 'profile_layout.html' %}
+                {% include 'layouts/profile_layout.html' %}
             {% endfor %}
         {% else %}
             <h4 class="p-3 text-muted">{% trans 'No profiles found :(' %}</h4>
