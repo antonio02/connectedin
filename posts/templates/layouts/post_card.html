@@ -22,7 +22,7 @@
             {% endif %}
 
             <img alt="{% blocktrans with name=post.profile.user.get_full_name %}Profile picture of {{ name }}{% endblocktrans %}"
-                 src="https://picsum.photos/50/?random" class="img-thumbnail post-profile-thumbnail">
+                 src="https://picsum.photos/50/?random" class="img-thumbnail" style="width: 50px; height: 50px;">
             <div class="d-flex flex-column ml-3">
                 <a href="{% url 'profile' post.profile.user.username %}">
                     <h4 class="card-title d-inline m-0">{{ post.profile.user.get_full_name }}</h4>

@@ -2,15 +2,15 @@
 
 <div class="card mb-4">
     <div class="card-body p-0">
-        <div class="d-flex flex-row flex-wrap align-items-center p-3 m-0">
-            <img style="width: 50px; height: 50px;"
+        <div class="d-flex flex-column flex-wrap align-items-center justify-content-center p-3 m-0">
+            <img style="width: 75px; height: 75px;"
             id="post-profile-thumbnail" src="https://picsum.photos/50/?random" class="img-thumbnail">
                 <a href="{% url 'profile' profile.user.username %}">
                 <h4 class="card-title d-inline m-0 ml-2">{{ profile.user.get_full_name }}</h4>
                 </a>
                 
                 {% if user_profile and profile.user.username != user_profile.user.username %}
-                <div class="btn-group ml-auto pl-3 pr-3 pt-2">
+                <div class="btn-group flex-wrap d-inline-flex mx-auto pt-2">
                     {% if profile in user_profile.contacts.all %}
                         <button onclick="call_url('{% url 'remove_contact' profile.user.username %}')"
                         class="btn btn-danger mb-2 btn-sm">{% trans 'Remove from contacts' %}</button>
@@ -28,7 +28,7 @@
                         {% for invitation in profile.sent_invitations.all %}
                             {% if invitation.receiver == user_profile %}
                                 <button onclick="call_url('{% url 'accept_invitation' invitation.id %}')"
-                                class="btn btn-success mb-2 mr-2 btn-sm">{% trans 'Accept invitation' %}</button>
+                                class="btn btn-success mb-2 btn-sm">{% trans 'Accept invitation' %}</button>
                                 <button onclick="call_url('{% url 'decline_invitation' invitation.id %}')"
                                 class="btn btn-danger mb-2 btn-sm">{% trans 'Decline invitation' %}</button>
                             {% endif %}

@@ -1,11 +1,9 @@
 from django.shortcuts import render
-from django.views.generic.base import View
 from django.http import HttpResponse
 from profiles.models import Profile
 from .models import Post
 from .forms import PostForm
 from django.db.models import Q
-from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -13,15 +11,14 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     if request.user.is_authenticated:
         user_profile = Profile.objects.get(user=request.user)
-        #posts = user_profile.posts.all().order_by('-post_date')
         posts = Post.objects.filter(Q(profile__user=request.user) | 
         Q(profile__contacts__user=request.user),
          ~Q(profile__blocked_contacts__user=request.user) ,
          ~Q(profile__in=user_profile.blocked_contacts.all())
         ).order_by('-post_date').all()
-        return render(request, 'index.html', {'post_form': PostForm(),
+        return render(request, 'timeline.html', {'post_form': PostForm(),
                         'posts': posts})
-    return render(request, 'index.html')
+    return render(request, 'timeline.html')
 
 @login_required
 def new_post(request):

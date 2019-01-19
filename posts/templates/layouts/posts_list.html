@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<div class="conteiner-fluid">
+    {% for post in posts %}
+        {% include 'layouts/post_card.html' %}
+    {% endfor %}
+</div>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-10 04:13+0000\n"
+"POT-Creation-Date: 2019-01-19 03:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: connectedin/settings.py:131
+#: connectedin/settings.py:126
 msgid "English"
 msgstr ""
 
-#: connectedin/settings.py:132
+#: connectedin/settings.py:127
 msgid "Brazilian portuguese"
 msgstr ""
 
@@ -34,16 +34,20 @@ msgstr ""
 msgid "Publish"
 msgstr ""
 
-#: posts/templates/layouts/post_layout.html:16
+#: posts/templates/layouts/post_card.html:9
+msgid "Post options"
+msgstr ""
+
+#: posts/templates/layouts/post_card.html:17
 #: profiles/templates/profile_header.html:20
 msgid "Are you sure?"
 msgstr ""
 
-#: posts/templates/layouts/post_layout.html:18
+#: posts/templates/layouts/post_card.html:19
 msgid "Delete"
 msgstr ""
 
-#: posts/templates/layouts/post_layout.html:23
+#: posts/templates/layouts/post_card.html:24
 #, python-format
 msgid "Profile picture of %(name)s"
 msgstr ""
@@ -65,31 +69,32 @@ msgid "Give admin"
 msgstr ""
 
 #: profiles/templates/profile_header.html:39
-#: searchs/templates/layouts/profile_layout.html:39
+#: searchs/templates/layouts/profile_card.html:39
 msgid "Invite"
 msgstr ""
 
 #: profiles/templates/profile_header.html:42
-#: searchs/templates/layouts/profile_layout.html:22
+#: searchs/templates/layouts/profile_card.html:22
 msgid "Cancel invitation"
 msgstr ""
 
 #: profiles/templates/profile_header.html:45
-#: searchs/templates/layouts/profile_layout.html:31
+#: searchs/templates/layouts/profile_card.html:31
 msgid "Accept invitation"
 msgstr ""
 
 #: profiles/templates/profile_header.html:47
-#: searchs/templates/layouts/profile_layout.html:33
+#: searchs/templates/layouts/profile_card.html:33
 msgid "Decline invitation"
 msgstr ""
 
 #: profiles/templates/profile_header.html:50
-#: searchs/templates/layouts/profile_layout.html:16
+#: searchs/templates/layouts/profile_card.html:16
 msgid "Remove from contacts"
 msgstr ""
 
-#: searchs/templates/search_results.html:5 templates/nav_header.html:12
+#: searchs/templates/search_results.html:5 templates/nav_header_logged.html:6
+#: templates/nav_header_logged.html:9
 msgid "Search"
 msgstr ""
 
@@ -101,39 +106,35 @@ msgstr ""
 msgid "No profiles found :("
 msgstr ""
 
-#: templates/nav_header.html:17
-msgid "More options"
-msgstr ""
-
-#: templates/nav_header.html:22
-msgid "My Profile"
-msgstr ""
-
-#: templates/nav_header.html:23
-msgid "Timeline"
-msgstr ""
-
-#: templates/nav_header.html:25 users/templates/change_password.html:5
-#: users/templates/forms/change_password_form.html:6
-msgid "Change Password"
-msgstr ""
-
-#: templates/nav_header.html:26
-msgid "Logout"
-msgstr ""
-
-#: templates/nav_header.html:36
+#: templates/nav_header.html:10
 msgid "Home"
 msgstr ""
 
-#: templates/nav_header.html:37 users/templates/forms/login_form.html:6
+#: templates/nav_header.html:11 users/templates/forms/login_form.html:6
 #: users/templates/forms/login_form.html:23 users/templates/login.html:5
 msgid "Login"
 msgstr ""
 
-#: templates/nav_header.html:38 users/templates/forms/signup_form.html:5
+#: templates/nav_header.html:12 users/templates/forms/signup_form.html:5
 #: users/templates/signup.html:5
 msgid "Sign Up"
+msgstr ""
+
+#: templates/nav_header_logged.html:19
+msgid "My Profile"
+msgstr ""
+
+#: templates/nav_header_logged.html:20
+msgid "Timeline"
+msgstr ""
+
+#: templates/nav_header_logged.html:22 users/templates/change_password.html:5
+#: users/templates/forms/change_password_form.html:6
+msgid "Change Password"
+msgstr ""
+
+#: templates/nav_header_logged.html:23
+msgid "Logout"
 msgstr ""
 
 #: templates/not_found.html:5
