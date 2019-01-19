@@ -1,9 +1,0 @@
-{
-    "python.pythonPath": "/home/antonio/ADS/PROGRAMACAO_INTERNET/Projeto Final/venv/bin/python3",
-    "python.linting.pylintEnabled": true,
-    "python.linting.pylintArgs": [
-        "--load-plugins",
-        "pylint_django"
-    ],
-    "python.linting.enabled": true,
-}

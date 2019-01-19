@@ -75,6 +75,7 @@ class LoginView(View):
 			'login_form'	: login_form,
 			})
 
+
 class ChangePasswordView(View):
 
 	template_name = 'change_password.html'
