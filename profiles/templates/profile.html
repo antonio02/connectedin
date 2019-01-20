@@ -10,8 +10,12 @@
 {% endblock title %}
 
 {% block body %}
-<div id="profile-container" class="row mr-auto ml-auto">
+<div id="profile-container" class="m-0 align-self-center w-100 flex-grow-1">
     {% include 'profile_header.html' %}
+    <div class="col-12 bg-info p-3"></div>
+    <div class="conteiner-fluid pt-4 px-4">
+        {% include 'layouts/posts_list.html' with posts=profile.posts.all %}
+    </div>
 </div>
 {% endblock body %}
     

@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<div class="conteiner-fluid">
+    {% for invitation in invitations %}
+        {% include 'layouts/invitation_card.html' %}
+    {% endfor %}
+</div>

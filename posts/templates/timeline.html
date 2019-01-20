@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
     <meta name="Description" content="Timeline">
@@ -20,18 +21,31 @@
             <a class="nav-link" data-toggle="tab" href="#invitations" role="tab" aria-controls="profile" aria-selected="false">Invitations</a>
         </li>
     </ul>
-    <div class="row m-0 justify-content-around tab-content mt-md-3">
+    <div class="row m-0 justify-content-around tab-content my-md-3 flex-grow-1">
         <div id="posts" class="col-12 col-md-7 bg-white p-0 d-md-block tab-pane show active">
             <div class="shadow p-3 position-relative" style="z-index: 1;">
                 {% include 'forms/new_post_form.html' %}
             </div>
-            <div class="conteiner-fluid pt-4 pr-4 pl-4">
+            <div class="conteiner-fluid pt-4 px-4">
                 {% include 'layouts/posts_list.html' with posts=posts%}
             </div>
         </div>
         
         <aside id="invitations" class="col-12 col-md-4 d-md-block bg-white tab-pane">
-            <h1>Teste</h1>
+            <div class="conteiner-fluid pt-4 px-2">
+                <h3>{% trans 'Received Invitations' %}</h3>
+                {% if received_invitations %}
+                    {% include 'layouts/invitation_list.html' with invitations=received_invitations%}
+                {% else %}
+                    <p class="text-muted ml-3">{% trans 'No invitation received :(' %}</p>
+                {% endif %}
+                <h3>{% trans 'Sent Invitations' %}</h3>
+                {% if sent_invitations %}
+                    {% include 'layouts/invitation_list.html' with invitations=sent_invitations%}
+                {% else %}
+                    <p class="text-muted ml-3">{% trans 'No invitation sent.' %}</p>
+                {% endif %}
+            </div>
         </aside>
     </div>
 {% else %}
