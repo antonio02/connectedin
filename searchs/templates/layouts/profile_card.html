@@ -10,7 +10,7 @@
                 </a>
                 
                 {% if user_profile and profile.user.username != user_profile.user.username %}
-                <div class="btn-group flex-wrap d-inline-flex mx-auto pt-2">
+                <div class="btn-group flex-wrap d-inline-flex flex-column mx-auto pt-2">
                     {% if profile in user_profile.contacts.all %}
                         <button onclick="call_url('{% url 'remove_contact' profile.user.username %}')"
                         class="btn btn-danger mb-2 btn-sm">{% trans 'Remove from contacts' %}</button>

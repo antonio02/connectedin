@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-19 03:33+0000\n"
+"POT-Creation-Date: 2019-01-25 00:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,13 +34,30 @@ msgstr "Nova Publicação"
 msgid "Publish"
 msgstr "Publicar"
 
+#: posts/templates/layouts/invitation_card.html:17
+#: profiles/templates/profile_header.html:49
+#: searchs/templates/layouts/profile_card.html:22
+msgid "Cancel invitation"
+msgstr "Cancelar convite"
+
+#: posts/templates/layouts/invitation_card.html:26
+#: profiles/templates/profile_header.html:52
+#: searchs/templates/layouts/profile_card.html:31
+msgid "Accept invitation"
+msgstr "Aceitar convite"
+
+#: posts/templates/layouts/invitation_card.html:28
+#: profiles/templates/profile_header.html:54
+#: searchs/templates/layouts/profile_card.html:33
+msgid "Decline invitation"
+msgstr "Rejeitar convite"
+
 #: posts/templates/layouts/post_card.html:9
-#| msgid "More options"
 msgid "Post options"
 msgstr "Mais opções"
 
 #: posts/templates/layouts/post_card.html:17
-#: profiles/templates/profile_header.html:20
+#: profiles/templates/profile_header.html:24
 msgid "Are you sure?"
 msgstr "Tem certeza?"
 
@@ -53,6 +70,34 @@ msgstr "Apagar"
 msgid "Profile picture of %(name)s"
 msgstr "Foto de perfil de %(name)s"
 
+#: posts/templates/timeline.html:19 posts/templates/timeline.html:36
+msgid "Contacts"
+msgstr "Contatos"
+
+#: posts/templates/timeline.html:24
+msgid "Posts"
+msgstr "Publicações"
+
+#: posts/templates/timeline.html:29 posts/templates/timeline.html:54
+msgid "Invitations"
+msgstr "Convites"
+
+#: posts/templates/timeline.html:55
+msgid "Received"
+msgstr "Recebido"
+
+#: posts/templates/timeline.html:81
+msgid "No invitation received."
+msgstr "Nenhum convite recebido."
+
+#: posts/templates/timeline.html:83 users/templates/password_reset_done.html:12
+msgid "Sent"
+msgstr "Enviado"
+
+#: posts/templates/timeline.html:109
+msgid "No invitation sent."
+msgstr "Nenhum convite enviado."
+
 #: profiles/forms.py:10
 msgid "Date of birth"
 msgstr "Data de nascimento"
@@ -61,35 +106,24 @@ msgstr "Data de nascimento"
 msgid "You must be over 13 years old"
 msgstr "Você deve ter mais de 13 anos"
 
-#: profiles/templates/profile_header.html:21
+#: profiles/templates/profile_header.html:25
 msgid "Block"
 msgstr "Bloquear"
 
-#: profiles/templates/profile_header.html:26
+#: profiles/templates/profile_header.html:30
 msgid "Give admin"
 msgstr "Tornar admin"
 
-#: profiles/templates/profile_header.html:39
+#: profiles/templates/profile_header.html:38
+msgid "Profile cover"
+msgstr "Perfis"
+
+#: profiles/templates/profile_header.html:46
 #: searchs/templates/layouts/profile_card.html:39
 msgid "Invite"
 msgstr "Convidar"
 
-#: profiles/templates/profile_header.html:42
-#: searchs/templates/layouts/profile_card.html:22
-msgid "Cancel invitation"
-msgstr "Cancelar convite"
-
-#: profiles/templates/profile_header.html:45
-#: searchs/templates/layouts/profile_card.html:31
-msgid "Accept invitation"
-msgstr "Aceitar convite"
-
-#: profiles/templates/profile_header.html:47
-#: searchs/templates/layouts/profile_card.html:33
-msgid "Decline invitation"
-msgstr "Rejeitar convite"
-
-#: profiles/templates/profile_header.html:50
+#: profiles/templates/profile_header.html:57
 #: searchs/templates/layouts/profile_card.html:16
 msgid "Remove from contacts"
 msgstr "Remover dos contatos"
@@ -222,10 +256,6 @@ msgstr "Já tem uma conta?"
 #: users/templates/password_reset_confirm.html:5
 msgid "Reset password"
 msgstr "Nova Senha"
-
-#: users/templates/password_reset_done.html:12
-msgid "Sent"
-msgstr "Enviado"
 
 #: users/templates/password_reset_done.html:13
 msgid ""

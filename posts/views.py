@@ -16,11 +16,13 @@ def index(request):
          ~Q(profile__blocked_contacts__user=request.user) ,
          ~Q(profile__in=user_profile.blocked_contacts.all())
         ).order_by('-post_date').all()
+        contacts = user_profile.contacts.exclude(profile__in=user_profile.blocked_contacts.all()).all()
         return render(request, 'timeline.html',
                       {'post_form': PostForm(),
                        'posts': posts,
                        'received_invitations': user_profile.received_invitations.all(),
-                       'sent_invitations': user_profile.sent_invitations.all()})
+                       'sent_invitations': user_profile.sent_invitations.all(),
+                       'contacts': contacts},)
     return render(request, 'timeline.html')
 
 @login_required

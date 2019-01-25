@@ -17,15 +17,24 @@
     <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
-<body class="min-vh-100 d-flex flex-column">
+<body>
+
+<main class="container-fluid d-inline-flex flex-column min-vh-100 p-0">
+
+
     {% if user.is_authenticated %}
         {% include 'nav_header_logged.html' %}
     {% else %}
         {% include 'nav_header.html' %}
     {% endif %}
+    <div class="row flex-grow-1 p-0 m-0">
+        <div class="col-12 p-0">
+            {% block body %}
+            {% endblock body %}
+        </div>
+    </div>
+</main>
 
-    {% block body %}
-    {% endblock body %}
 
 </body>
 </html>

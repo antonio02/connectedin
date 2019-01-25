@@ -1,9 +1,13 @@
 {% load i18n %}
 
 
-<div id="profile-cover" class="col-12 m-0 d-flex flex-column p-2">
-    <div id="profile-card" class="card p-3 align-items-center m-auto">
-        {% if profile.user.is_superuser %} 
+<div class="m-0 d-flex flex-column justify-content-center">
+    <img src="https://picsum.photos/1080/320/?random"
+         class="img-fluid" style="min-height: 320px; object-fit: cover">
+
+    <div class="card p-3 align-items-center align-self-center position-absolute"
+         style="background-color: rgba(255, 255, 255, 0.8);">
+        {% if profile.user.is_superuser %}
             <span class="badge badge-primary mb-2">Admin</span>
         {% else %}
             <span style="visibility: hidden;" class="badge badge-primary">Admin</span>
@@ -29,7 +33,10 @@
             </div>
         {% endif %}
             
-        <img id="profile-thumbnail" src="https://picsum.photos/150/?random" class="img-thumbnail">
+        <img src="https://picsum.photos/150/?random"
+             class="border rounded"
+             alt="{% trans 'Profile cover' %}"
+             style="width: 150px;height: 150px;object-fit: cover;">
         <h4 class="pt-2">{{profile.user.get_full_name}}</h4>        
 
         {% if request.user.is_authenticated and friendship is not None %}
