@@ -9,3 +9,8 @@ body{
 .bg-light-gray{
     background-color: #f5f5f5;
 }
+
+.carousel-item {
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+}

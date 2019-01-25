@@ -30,9 +30,10 @@
             </li>
         </ul>
         <div class="row m-0 justify-content-around tab-content py-lg-3 h-100">
+
             <nav id="contacts"
-                 class="col-12 col-lg-2 d-lg-block p-0 bg-white tab-pane">
-                <div class="conteiner-fluid pt-3 px-3">
+                 class="col-12 col-md-10 col-lg-2 d-lg-block p-0 bg-white tab-pane">
+                <div class="conteiner-fluid p-3 sticky-top">
                     <h3>{% trans 'Contacts' %}</h3>
                 {% if contacts %}
                     {% for contact in contacts %}
@@ -43,8 +44,9 @@
                 {% endif %}
                 </div>
             </nav>
+
             <div id="posts"
-                 class="col-12 col-lg-6 bg-white p-0 d-lg-block tab-pane show active">
+                 class="col-12 col-md-10 col-lg-6 bg-white p-0 d-lg-block tab-pane show active">
                 <div class="shadow p-3 position-relative" style="z-index: 1;">
                     {% include 'forms/new_post_form.html' %}
                 </div>
@@ -53,8 +55,8 @@
                 </div>
             </div>
 
-            <aside id="invitations" class="col-12 col-lg-3 d-lg-block bg-white tab-pane">
-                <div class="conteiner-fluid pt-4 px-2">
+            <aside id="invitations" class="col-12 col-md-10 col-lg-3 d-lg-block bg-white tab-pane">
+                <div class="conteiner-fluid pt-4 px-2 sticky-top">
                     <h3>{% trans 'Invitations' %}</h3>
                     <h5>{% trans 'Received' %}</h5>
                     {% if received_invitations %}
@@ -62,7 +64,7 @@
                             <div class="carousel-inner">
                                 {% for invitation in received_invitations %}
                                     {% if forloop.first %}
-                                        <div class="carousel-item active">
+                                        <div class="carousel-item visible active">
                                             {% include 'layouts/invitation_card.html' %}
                                         </div>
                                     {% else %}
