@@ -26,6 +26,23 @@ def index(request):
     return render(request, 'timeline.html')
 
 @login_required
+def admin_timeline(request):
+    if not request.user.is_superuser:
+        return HttpResponse(status=404)
+    user_profile = Profile.objects.get(user=request.user)
+    contacts = user_profile.contacts.exclude(profile__in=user_profile.blocked_contacts.all()).all()
+    all_profiles = Profile.objects.exclude(Q(user=request.user) |
+                                           Q(user__in=[i.user for i in contacts]) |
+                                           Q(received_invitations__sender=user_profile) |
+                                           Q(sent_invitations__receiver=user_profile)).all()
+    return render(request, 'admin_timeline.html',
+                  {'all_profiles': all_profiles,
+                   'contacts': contacts,
+                   'user_profile': user_profile,
+                   'received_invitations': user_profile.received_invitations.all(),
+                   'sent_invitations': user_profile.sent_invitations.all(),})
+
+@login_required
 def new_post(request):
     if request.method == 'POST':
         post_text = request.POST.get('post_text', None) 

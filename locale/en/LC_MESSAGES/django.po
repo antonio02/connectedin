@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-25 00:44+0000\n"
+"POT-Creation-Date: 2019-01-27 18:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,6 +28,48 @@ msgstr ""
 
 #: posts/forms.py:9 posts/templates/forms/new_post_form.html:7
 msgid "New Post"
+msgstr ""
+
+#: posts/templates/admin_timeline.html:16
+#: posts/templates/admin_timeline.html:33 posts/templates/timeline.html:19
+#: posts/templates/timeline.html:37
+msgid "Contacts"
+msgstr ""
+
+#: posts/templates/admin_timeline.html:21
+#: posts/templates/admin_timeline.html:47
+msgid "All profiles"
+msgstr ""
+
+#: posts/templates/admin_timeline.html:26
+#: posts/templates/admin_timeline.html:61 posts/templates/timeline.html:29
+#: posts/templates/timeline.html:60
+msgid "Invitations"
+msgstr ""
+
+#: posts/templates/admin_timeline.html:40 posts/templates/timeline.html:43
+msgid "You have no contacts."
+msgstr ""
+
+#: posts/templates/admin_timeline.html:53
+msgid "You have all profiles in contacts or pending invitations."
+msgstr ""
+
+#: posts/templates/admin_timeline.html:62 posts/templates/timeline.html:61
+msgid "Received"
+msgstr ""
+
+#: posts/templates/admin_timeline.html:88 posts/templates/timeline.html:87
+msgid "No invitation received."
+msgstr ""
+
+#: posts/templates/admin_timeline.html:90 posts/templates/timeline.html:89
+#: users/templates/password_reset_done.html:12
+msgid "Sent"
+msgstr ""
+
+#: posts/templates/admin_timeline.html:116 posts/templates/timeline.html:115
+msgid "No invitation sent."
 msgstr ""
 
 #: posts/templates/forms/new_post_form.html:19
@@ -70,32 +112,8 @@ msgstr ""
 msgid "Profile picture of %(name)s"
 msgstr ""
 
-#: posts/templates/timeline.html:19 posts/templates/timeline.html:36
-msgid "Contacts"
-msgstr ""
-
 #: posts/templates/timeline.html:24
 msgid "Posts"
-msgstr ""
-
-#: posts/templates/timeline.html:29 posts/templates/timeline.html:54
-msgid "Invitations"
-msgstr ""
-
-#: posts/templates/timeline.html:55
-msgid "Received"
-msgstr ""
-
-#: posts/templates/timeline.html:81
-msgid "No invitation received."
-msgstr ""
-
-#: posts/templates/timeline.html:83 users/templates/password_reset_done.html:12
-msgid "Sent"
-msgstr ""
-
-#: posts/templates/timeline.html:109
-msgid "No invitation sent."
 msgstr ""
 
 #: profiles/forms.py:10
@@ -163,12 +181,16 @@ msgstr ""
 msgid "Timeline"
 msgstr ""
 
-#: templates/nav_header_logged.html:22 users/templates/change_password.html:5
+#: templates/nav_header_logged.html:22
+msgid "Admin timeline"
+msgstr ""
+
+#: templates/nav_header_logged.html:25 users/templates/change_password.html:5
 #: users/templates/forms/change_password_form.html:6
 msgid "Change Password"
 msgstr ""
 
-#: templates/nav_header_logged.html:23
+#: templates/nav_header_logged.html:26
 msgid "Logout"
 msgstr ""
 
@@ -273,6 +295,6 @@ msgstr ""
 msgid "Recover password"
 msgstr ""
 
-#: users/views.py:100 users/views.py:106
+#: users/views.py:102 users/views.py:108
 msgid "Old password is incorrect"
 msgstr ""

@@ -54,7 +54,7 @@
                 class="btn btn-danger mb-2 btn-sm">{% trans 'Decline invitation' %}</button>
             {% elif friendship == 3 %}
                 <button onclick="call_url('{% url 'remove_contact' profile.user.username %}')"
-                class="btn btn-danger mb-2 btn-sm">{% trans 'Remove from contacts' %}</button>
+                class="btn btn-outline-danger mb-2 btn-sm">{% trans 'Remove from contacts' %}</button>
             {% endif %}
         </div>
         {% endif %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-25 00:44+0000\n"
+"POT-Creation-Date: 2019-01-27 18:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,6 +29,48 @@ msgstr "Português do Brasil"
 #: posts/forms.py:9 posts/templates/forms/new_post_form.html:7
 msgid "New Post"
 msgstr "Nova Publicação"
+
+#: posts/templates/admin_timeline.html:16
+#: posts/templates/admin_timeline.html:33 posts/templates/timeline.html:19
+#: posts/templates/timeline.html:37
+msgid "Contacts"
+msgstr "Contatos"
+
+#: posts/templates/admin_timeline.html:21
+#: posts/templates/admin_timeline.html:47
+msgid "All profiles"
+msgstr "Todos os perfis"
+
+#: posts/templates/admin_timeline.html:26
+#: posts/templates/admin_timeline.html:61 posts/templates/timeline.html:29
+#: posts/templates/timeline.html:60
+msgid "Invitations"
+msgstr "Convites"
+
+#: posts/templates/admin_timeline.html:40 posts/templates/timeline.html:43
+msgid "You have no contacts."
+msgstr "Você não tem contatos"
+
+#: posts/templates/admin_timeline.html:53
+msgid "You have all profiles in contacts or pending invitations."
+msgstr "Você já tem todos os perfis nos contatos ou convites pendentes."
+
+#: posts/templates/admin_timeline.html:62 posts/templates/timeline.html:61
+msgid "Received"
+msgstr "Recebido"
+
+#: posts/templates/admin_timeline.html:88 posts/templates/timeline.html:87
+msgid "No invitation received."
+msgstr "Nenhum convite recebido."
+
+#: posts/templates/admin_timeline.html:90 posts/templates/timeline.html:89
+#: users/templates/password_reset_done.html:12
+msgid "Sent"
+msgstr "Enviado"
+
+#: posts/templates/admin_timeline.html:116 posts/templates/timeline.html:115
+msgid "No invitation sent."
+msgstr "Nenhum convite enviado."
 
 #: posts/templates/forms/new_post_form.html:19
 msgid "Publish"
@@ -70,33 +112,9 @@ msgstr "Apagar"
 msgid "Profile picture of %(name)s"
 msgstr "Foto de perfil de %(name)s"
 
-#: posts/templates/timeline.html:19 posts/templates/timeline.html:36
-msgid "Contacts"
-msgstr "Contatos"
-
 #: posts/templates/timeline.html:24
 msgid "Posts"
 msgstr "Publicações"
-
-#: posts/templates/timeline.html:29 posts/templates/timeline.html:54
-msgid "Invitations"
-msgstr "Convites"
-
-#: posts/templates/timeline.html:55
-msgid "Received"
-msgstr "Recebido"
-
-#: posts/templates/timeline.html:81
-msgid "No invitation received."
-msgstr "Nenhum convite recebido."
-
-#: posts/templates/timeline.html:83 users/templates/password_reset_done.html:12
-msgid "Sent"
-msgstr "Enviado"
-
-#: posts/templates/timeline.html:109
-msgid "No invitation sent."
-msgstr "Nenhum convite enviado."
 
 #: profiles/forms.py:10
 msgid "Date of birth"
@@ -163,12 +181,16 @@ msgstr "Meu Perfil"
 msgid "Timeline"
 msgstr "Linha do tempo"
 
-#: templates/nav_header_logged.html:22 users/templates/change_password.html:5
+#: templates/nav_header_logged.html:22
+msgid "Admin timeline"
+msgstr "Linha do tempo do admin"
+
+#: templates/nav_header_logged.html:25 users/templates/change_password.html:5
 #: users/templates/forms/change_password_form.html:6
 msgid "Change Password"
 msgstr "Alterar senha"
 
-#: templates/nav_header_logged.html:23
+#: templates/nav_header_logged.html:26
 msgid "Logout"
 msgstr "Sair"
 
@@ -278,6 +300,6 @@ msgstr ""
 msgid "Recover password"
 msgstr "Nova Senha"
 
-#: users/views.py:100 users/views.py:106
+#: users/views.py:102 users/views.py:108
 msgid "Old password is incorrect"
 msgstr "A senha antiga está incorreta"

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    <meta name="Description" content="Admin Timeline">
+    <title>ConnectedIn</title>
+{% endblock title %}
+
+{% block body %}
+    <ul class="nav nav-tabs d-lg-none pt-1 justify-content-center bg-white sticky-top"
+        role="tablist">
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab"
+               href="#contacts" role="tab" aria-controls="contacts"
+               aria-selected="false">{% trans 'Contacts' %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab"
+               href="#all-profiles" role="tab" aria-controls="home"
+               aria-selected="true">{% trans 'All profiles' %}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab"
+               href="#invitations" role="tab" aria-controls="profile"
+               aria-selected="false">{% trans 'Invitations' %}</a>
+        </li>
+    </ul>
+    <div class="row m-0 justify-content-around py-lg-3 h-100 tab-content">
+
+        <div id="contacts"
+             class="col-12 col-md-10 col-lg-3 pt-3 px-3 bg-white d-lg-block tab-pane">
+            <h3>{% trans 'Contacts' %}</h3>
+
+        {% if contacts %}
+            {% for contact in contacts %}
+                {% include 'layouts/profile_card.html' with profile=contact %}
+            {% endfor %}
+        {% else %}
+            <p class="text-muted ml-3">{% trans 'You have no contacts.' %}</p>
+        {% endif %}
+
+        </div>
+
+        <div id="all-profiles"
+             class="col-12 col-md-10 col-lg-5 pt-3 px-3 bg-white d-lg-block tab-pane show active">
+            <h3>{% trans 'All profiles' %}</h3>
+        {% if all_profiles %}
+            {% for profile in all_profiles %}
+                {% include 'layouts/profile_card.html' with profile=profile %}
+            {% endfor %}
+        {% else %}
+            <p class="text-muted ml-3">{% trans 'You have all profiles in contacts or pending invitations.' %}</p>
+        {% endif %}
+
+        </div>
+
+        <div id="invitations"
+             class="col-12 col-md-10 col-lg-3 p-3 bg-white d-lg-block tab-pane">
+            <div class="conteiner-fluid sticky-top">
+                <h3>{% trans 'Invitations' %}</h3>
+                <h5>{% trans 'Received' %}</h5>
+                {% if received_invitations %}
+                    <div id="carouselReceivedInvitations" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for invitation in received_invitations %}
+                                {% if forloop.first %}
+                                    <div class="carousel-item visible active">
+                                        {% include 'layouts/invitation_card.html' %}
+                                    </div>
+                                {% else %}
+                                    <div class="carousel-item">
+                                        {% include 'layouts/invitation_card.html' %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev bg-dark" href="#carouselReceivedInvitations" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" style="color: black" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next bg-dark" href="#carouselReceivedInvitations" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" style="color: black" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                {% else %}
+                    <p class="text-muted ml-3">{% trans 'No invitation received.' %}</p>
+                {% endif %}
+                <h5 class="mt-3">{% trans 'Sent' %}</h5>
+                {% if sent_invitations %}
+                    <div id="carouselReceivedInvitations" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for invitation in sent_invitations %}
+                                {% if forloop.first %}
+                                    <div class="carousel-item active">
+                                        {% include 'layouts/invitation_card.html' %}
+                                    </div>
+                                {% else %}
+                                    <div class="carousel-item">
+                                        {% include 'layouts/invitation_card.html' %}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev bg-dark" href="#carouselReceivedInvitations" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" style="color: black" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next bg-dark" href="#carouselReceivedInvitations" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" style="color: black" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                {% else %}
+                    <p class="text-muted ml-3">{% trans 'No invitation sent.' %}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

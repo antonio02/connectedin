@@ -69,6 +69,8 @@ class LoginView(View):
 			password = login_form.cleaned_data['password']
 			user = authenticate(username=username, password=password)
 			login(request, user)
+			if user.is_superuser:
+				return redirect('admin_timeline')
 			return redirect('index')
 		
 		return render(request, self.template_name, {
