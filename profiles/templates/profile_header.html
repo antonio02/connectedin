@@ -32,7 +32,7 @@
             </div>
         {% endif %}
             
-        <img src="https://picsum.photos/150/?random"
+        <img src="{{ profile.photo.url }}"
              class="border rounded"
              alt="{% trans 'Profile cover' %}"
              style="width: 150px;height: 150px;object-fit: cover;">

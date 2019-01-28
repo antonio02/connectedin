@@ -12,11 +12,12 @@ class NewProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = [
-            'date_of_birth',
+            'date_of_birth', 'photo'
         ]
 
         widgets = {
-            'date_of_birth': forms.DateInput(attrs={'type':'date', 'placeholder': 'Date of Birth'})
+            'date_of_birth': forms.DateInput(attrs={'type': 'date', 'placeholder': 'Date of Birth'}),
+            'photo': forms.FileInput(attrs={'class': 'border rounded', 'style': 'width: 150px;height: 150px;object-fit: cover;'})
         }
 
     def clean_date_of_birth(self):
