@@ -4,7 +4,7 @@
     <div class="card-body p-0">
         <div class="d-flex flex-row align-items-center pt-3 pl-3 pr-3">
 
-            {% if request.user.username == post.profile.user.username %}
+            {% if request.user.username == post.profile.user.username or request.user.is_superuser %}
                 <div style="right: 0; top: 0;" class="position-absolute dropdown show">
                     <button class="btn dropdown-toggle" aria-label="{% trans 'Post options' %}"
                             role="button" id="dropdownPostOptions"
@@ -16,7 +16,15 @@
                          aria-labelledby="dropdownPostOptions" >
                         <button onclick="return confirm('{% trans 'Are you sure?' %}')?
                                 call_url('{% url 'delete_post' post.id %}') : ''"
-                                class="btn dropdown-item">{% trans 'Delete' %}</button>
+                                class="btn dropdown-item">
+
+                            {% if request.user.is_superuser and not request.user.username == post.profile.user.username %}
+                                {% trans 'Delete (Admin)' %}
+                            {% else %}
+                                {% trans 'Delete' %}
+                            {% endif %}
+
+                        </button>
                     </div>
                 </div>
             {% endif %}

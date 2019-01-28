@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-27 18:55+0000\n"
+"POT-Creation-Date: 2019-01-28 00:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: connectedin/settings.py:126
+#: connectedin/settings.py:130
 msgid "English"
 msgstr ""
 
-#: connectedin/settings.py:127
+#: connectedin/settings.py:131
 msgid "Brazilian portuguese"
 msgstr ""
 
@@ -77,19 +77,19 @@ msgid "Publish"
 msgstr ""
 
 #: posts/templates/layouts/invitation_card.html:17
-#: profiles/templates/profile_header.html:49
+#: profiles/templates/profile_header.html:48
 #: searchs/templates/layouts/profile_card.html:22
 msgid "Cancel invitation"
 msgstr ""
 
 #: posts/templates/layouts/invitation_card.html:26
-#: profiles/templates/profile_header.html:52
+#: profiles/templates/profile_header.html:51
 #: searchs/templates/layouts/profile_card.html:31
 msgid "Accept invitation"
 msgstr ""
 
 #: posts/templates/layouts/invitation_card.html:28
-#: profiles/templates/profile_header.html:54
+#: profiles/templates/profile_header.html:53
 #: searchs/templates/layouts/profile_card.html:33
 msgid "Decline invitation"
 msgstr ""
@@ -99,15 +99,19 @@ msgid "Post options"
 msgstr ""
 
 #: posts/templates/layouts/post_card.html:17
-#: profiles/templates/profile_header.html:24
+#: profiles/templates/profile_header.html:23
 msgid "Are you sure?"
 msgstr ""
 
-#: posts/templates/layouts/post_card.html:19
-msgid "Delete"
+#: posts/templates/layouts/post_card.html:22
+msgid "Delete (Admin)"
 msgstr ""
 
 #: posts/templates/layouts/post_card.html:24
+msgid "Delete"
+msgstr ""
+
+#: posts/templates/layouts/post_card.html:32
 #, python-format
 msgid "Profile picture of %(name)s"
 msgstr ""
@@ -124,24 +128,24 @@ msgstr ""
 msgid "You must be over 13 years old"
 msgstr ""
 
-#: profiles/templates/profile_header.html:25
+#: profiles/templates/profile_header.html:24
 msgid "Block"
 msgstr ""
 
-#: profiles/templates/profile_header.html:30
+#: profiles/templates/profile_header.html:29
 msgid "Give admin"
 msgstr ""
 
-#: profiles/templates/profile_header.html:38
+#: profiles/templates/profile_header.html:37
 msgid "Profile cover"
 msgstr ""
 
-#: profiles/templates/profile_header.html:46
+#: profiles/templates/profile_header.html:45
 #: searchs/templates/layouts/profile_card.html:39
 msgid "Invite"
 msgstr ""
 
-#: profiles/templates/profile_header.html:57
+#: profiles/templates/profile_header.html:56
 #: searchs/templates/layouts/profile_card.html:16
 msgid "Remove from contacts"
 msgstr ""
@@ -168,8 +172,8 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: templates/nav_header.html:12 users/templates/forms/signup_form.html:5
-#: users/templates/signup.html:5
+#: templates/nav_header.html:12 users/templates/deactivate_profile.html:5
+#: users/templates/forms/signup_form.html:5 users/templates/signup.html:5
 msgid "Sign Up"
 msgstr ""
 
@@ -191,6 +195,11 @@ msgid "Change Password"
 msgstr ""
 
 #: templates/nav_header_logged.html:26
+#: users/templates/forms/deactivate_form.html:6
+msgid "Deactivate my profile"
+msgstr ""
+
+#: templates/nav_header_logged.html:28 users/templates/activate_profile.html:20
 msgid "Logout"
 msgstr ""
 
@@ -218,7 +227,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: users/forms.py:21 users/forms.py:96
+#: users/forms.py:21 users/forms.py:97
 msgid "Confirm password"
 msgstr ""
 
@@ -227,23 +236,48 @@ msgstr ""
 msgid "Username \"%(username)s\" is already in use."
 msgstr ""
 
-#: users/forms.py:50 users/forms.py:104
+#: users/forms.py:50 users/forms.py:105
 msgid "Passwords does not match"
 msgstr ""
 
-#: users/forms.py:81
+#: users/forms.py:82
 msgid "Wrong username or password"
 msgstr ""
 
-#: users/forms.py:94
+#: users/forms.py:95
 msgid "Old Password"
 msgstr ""
 
-#: users/forms.py:95 users/templates/forms/password_reset_confirm_form.html:7
+#: users/forms.py:96 users/templates/forms/password_reset_confirm_form.html:7
 msgid "New password"
 msgstr ""
 
+#: users/forms.py:114
+msgid "Justification"
+msgstr ""
+
+#: users/templates/activate_profile.html:5
+msgid "Activate"
+msgstr ""
+
+#: users/templates/activate_profile.html:12
+msgid "You profile is deactivated"
+msgstr ""
+
+#: users/templates/activate_profile.html:14
+msgid "To reactivate you profile"
+msgstr ""
+
+#: users/templates/activate_profile.html:17
+msgid "Click here"
+msgstr ""
+
+#: users/templates/activate_profile.html:19
+msgid "or"
+msgstr ""
+
 #: users/templates/forms/change_password_form.html:36
+#: users/templates/forms/deactivate_form.html:23
 msgid "Finish"
 msgstr ""
 
@@ -295,6 +329,6 @@ msgstr ""
 msgid "Recover password"
 msgstr ""
 
-#: users/views.py:102 users/views.py:108
+#: users/views.py:100 users/views.py:106
 msgid "Old password is incorrect"
 msgstr ""

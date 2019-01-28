@@ -13,7 +13,6 @@ from .decorators import *
 @profile_exist_and_not_blocked
 def profile(request, username, profile=None, user_profile=None):
     if profile is None:
-        print('passou aq')
         profile = Profile.objects.get(user=User.objects.get(username=username))
 
     if request.user.is_authenticated:
@@ -70,7 +69,7 @@ def invite_profile(request, username, profile=None, user_profile=None):
 @login_required
 def accept_invitation(request, invitation_id):
     try:
-        invitation = Invitation.objects.get(id=invitation_id)
+        invitation = Invitation.objects.get(id=invitation_id, sender__user__is_active=True)
         if invitation.receiver.user == request.user:
             invitation.accept()
             return HttpResponse(status=200)
@@ -83,7 +82,7 @@ def accept_invitation(request, invitation_id):
 @login_required
 def decline_invitation(request, invitation_id):
     try:
-        invitation = Invitation.objects.get(id=invitation_id)
+        invitation = Invitation.objects.get(id=invitation_id, sender__user__is_active=True)
         if invitation.receiver.user == request.user:
             invitation.decline()
             return HttpResponse(status=200)
@@ -96,7 +95,7 @@ def decline_invitation(request, invitation_id):
 @login_required
 def cancel_invitation(request, invitation_id):
     try:
-        invitation = Invitation.objects.get(id=invitation_id)
+        invitation = Invitation.objects.get(id=invitation_id, receiver__user__is_active=True)
         if invitation.sender.user == request.user:
             invitation.cancel()
             return HttpResponse(status=200)
@@ -111,7 +110,7 @@ def cancel_invitation(request, invitation_id):
 def remove_contact(request, username):
     try:
         user_profile = Profile.objects.get(user=request.user)
-        remove_profile = user_profile.contacts.get(user__username=username)
+        remove_profile = user_profile.contacts.get(user__username=username, user__is_active=True)
         user_profile.contacts.remove(remove_profile)
         remove_profile.contacts.remove(user_profile)
         return HttpResponse(status=200)
@@ -144,6 +143,9 @@ def block_profile(request, username, profile=None, user_profile=None):
     if profile is None:
         profile = Profile.objects.get(user__username=username)
 
+    if profile.user.is_superuser:
+        return HttpResponse(status=400)
+
     if user_profile is None:
         user_profile = Profile.objects.get(user__username=request.user.username)
 
@@ -158,7 +160,7 @@ def block_profile(request, username, profile=None, user_profile=None):
 
 @login_required
 @require_other_profile
-@profile_exist
+@profile_exist_and_is_active
 def unblock_profile(request, username, profile=None):
     if profile is None:
         profile = Profile.objects.get(user__username=username)

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    <title>{% trans 'Sign Up' %}</title>
+{% endblock title %}
+    
+
+{% block body %}
+<div class="row justify-content-around m-0 pt-3">
+    <div class="card p-3 col-11 col-md-6">
+        {% include 'forms/deactivate_form.html' %}
+    </div>
+</div>
+
+{% endblock body %}

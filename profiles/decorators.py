@@ -2,11 +2,13 @@ from .models import Profile
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
-def profile_exist(func):
+def profile_exist_and_is_active(func):
     def decorator(request, username, profile=None, *args, **kwargs):
         if profile is None:
             try:
                 profile = Profile.objects.get(user__username=username)
+                if not profile.user.is_active:
+                    return HttpResponse(status=404)
                 return func(request, username, profile=profile, *args, **kwargs)
             except Profile.DoesNotExist:
                 return HttpResponse(status=404)
@@ -26,7 +28,7 @@ def require_other_profile(func):
 
 def profile_exist_and_not_blocked(func):
 
-    @profile_exist
+    @profile_exist_and_is_active
     def decorator(request, username, profile=None, user_profile=None, *args, **kwargs):
         if not request.user.is_authenticated:
             return func(request, username, profile=profile, user_profile=user_profile, *args, **kwargs)

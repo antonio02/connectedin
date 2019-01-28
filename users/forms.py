@@ -77,8 +77,10 @@ class UserLoginForm(forms.Form):
 
         if username and password:
             user = authenticate(username=username, password=password)
+
             if not user:
                 raise forms.ValidationError(_('Wrong username or password'), code='wrong_login')
+
         
         return super(UserLoginForm, self).clean()
 
@@ -87,7 +89,6 @@ class ChangePasswordForm(forms.Form):
     password        = forms.CharField(widget=forms.PasswordInput, required=True, max_length=128)
     retype_password = forms.CharField(widget=forms.PasswordInput, required=True, max_length=128)
 
-    
     def __init__(self, *args, **kwargs):
         super(ChangePasswordForm, self).__init__(*args, **kwargs)
 
@@ -103,3 +104,11 @@ class ChangePasswordForm(forms.Form):
             self.add_error('retype_password',
                 forms.ValidationError(_('Passwords does not match'), code='password_not_match'))
         return super(ChangePasswordForm, self).clean()
+
+class DeactivateProfileForm(forms.Form):
+    justification = forms.CharField(required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(DeactivateProfileForm, self).__init__(*args, **kwargs)
+
+        self.fields['justification'].label   = _('Justification')
