@@ -11,7 +11,7 @@
     <ul class="pagination">
             {% if posts.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="{% url 'index' %}?page={{ posts.previous_page_number }}" tabindex="-1">{% trans 'Previous' %}</a>
+                    <a class="page-link" href="?page={{ posts.previous_page_number }}" tabindex="-1">{% trans 'Previous' %}</a>
                 </li>
             {% endif %}
 
@@ -21,13 +21,13 @@
                         <a class="page-link" href="#">{{ num }} <span class="sr-only">(current)</span></a>
                     </li>
                 {% elif num > posts.number|add:'-3' and num < posts.number|add:3 %}
-                     <li class="page-item"><a class="page-link" href="{% url 'index' %}?page={{ num }}">{{ num }}</a></li>
+                     <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
                 {% endif %}
             {% endfor %}
 
             {% if posts.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="{% url 'index' %}?page={{ posts.next_page_number }}">{% trans 'Next' %}</a>
+                    <a class="page-link" href="?page={{ posts.next_page_number }}">{% trans 'Next' %}</a>
                 </li>
             {% endif %}
     </ul>
