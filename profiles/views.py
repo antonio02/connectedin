@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from .models import Profile, Invitation
-from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Q
-from django.utils.translation import ugettext_lazy as _
 from .decorators import *
+from django.db import transaction
 
 
 # Create your views here.
@@ -105,6 +103,7 @@ def cancel_invitation(request, invitation_id):
         return HttpResponse(status=404)
 
 
+@transaction.atomic
 @login_required
 @require_other_profile
 def remove_contact(request, username):
@@ -136,6 +135,7 @@ def give_super(request, username):
         return HttpResponse(status=404)
 
 
+@transaction.atomic
 @login_required
 @require_other_profile
 @profile_exist_and_not_blocked
