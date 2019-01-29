@@ -4,6 +4,7 @@ from .models import Profile, Invitation
 from django.db.models import Q
 from .decorators import *
 from django.db import transaction
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -13,9 +14,14 @@ def profile(request, username, profile=None, user_profile=None):
     if profile is None:
         profile = Profile.objects.get(user=User.objects.get(username=username))
 
+    posts = profile.posts.all()
+    paginador = Paginator(posts, 10)
+    page = request.GET.get('page')
+    posts = paginador.get_page(page)
+
     if request.user.is_authenticated:
         if request.user.username == username:
-            return render(request, 'profile.html', {'profile': profile})
+            return render(request, 'profile.html', {'profile': profile, 'posts': posts})
 
         friendship = 0
         invitation = None
@@ -38,9 +44,10 @@ def profile(request, username, profile=None, user_profile=None):
 
         return render(request, 'profile.html', {'profile': profile,
                                                 'friendship': friendship,
-                                                'invitation': invitation})
+                                                'invitation': invitation,
+                                                'posts': posts})
 
-    return render(request, 'profile.html', {'profile': profile})
+    return render(request, 'profile.html', {'profile': profile, 'posts': posts})
 
 
 @login_required
