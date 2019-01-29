@@ -65,11 +65,11 @@
                                 {% for invitation in received_invitations %}
                                     {% if forloop.first %}
                                         <div class="carousel-item visible active">
-                                            {% include 'layouts/invitation_card.html' %}
+                                            {% include 'layouts/cards/invitation_card.html' %}
                                         </div>
                                     {% else %}
                                         <div class="carousel-item">
-                                            {% include 'layouts/invitation_card.html' %}
+                                            {% include 'layouts/cards/invitation_card.html' %}
                                         </div>
                                     {% endif %}
                                 {% endfor %}
@@ -93,11 +93,11 @@
                                 {% for invitation in sent_invitations %}
                                     {% if forloop.first %}
                                         <div class="carousel-item active">
-                                            {% include 'layouts/invitation_card.html' %}
+                                            {% include 'layouts/cards/invitation_card.html' %}
                                         </div>
                                     {% else %}
                                         <div class="carousel-item">
-                                            {% include 'layouts/invitation_card.html' %}
+                                            {% include 'layouts/cards/invitation_card.html' %}
                                         </div>
                                     {% endif %}
                                 {% endfor %}

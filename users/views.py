@@ -33,7 +33,7 @@ class SignUpView(View):
 
     @method_decorator(require_anon)
     def post(self, request):
-        profile_form = NewProfileForm(request.POST)
+        profile_form = NewProfileForm(request.POST, request.FILES)
         user_form = NewUserForm(request.POST)
 
         if profile_form.is_valid() and user_form.is_valid():
