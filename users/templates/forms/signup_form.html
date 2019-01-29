@@ -1,6 +1,6 @@
 {% load widget_tweaks %}
 {% load i18n %}
-<form class="form-group d-flex flex-column" action="{% url 'signup' %}" method="post">
+<form class="form-group d-flex flex-column" action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <h3>{% trans 'Sign Up' %}</h3>
 
@@ -20,7 +20,24 @@
         </div>
     {% endif %}
 
-    
+    <div class="card p-3 align-items-center align-self-center"
+         style="background-color: rgba(255, 255, 255, 0.8);">
+        {% if user_form.is_bound %}
+            {% if field.errors %}
+                {% render_field profile_form.photo class="form-control is-invalid" %}
+                {% for error in profile_form.photo.errors %}
+                    <div class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% render_field profile_form.photo class="form-control is-valid" %}
+            {% endif %}
+        {% else %}
+            {% render_field profile_form.photo class="form-control" %}
+        {% endif %}
+    </div>
+
 
     {% for field in user_form.visible_fields%}
     <span class="mt-2">{{ field.label }}</span>
@@ -40,23 +57,22 @@
         {% endif %}
     {% endfor %}
 
-    {% for field in profile_form.visible_fields %}
-    <span class="mt-2">{{ field.label }}</span>
+    <span class="mt-2">{{ profile_form.date_of_birth.label }}</span>
         {% if user_form.is_bound %}
-            {% if field.errors %}
-                {% render_field field class="form-control is-invalid" %}
-                {% for error in field.errors %}
+            {% if profile_form.date_of_birth.errors %}
+                {% render_field profile_form.date_of_birth class="form-control is-invalid" %}
+                {% for error in profile_form.date_of_birth.errors %}
                 <div class="invalid-feedback">
                     {{ error }}
                 </div>
                 {% endfor %}
             {% else %}
-                {% render_field field class="form-control is-valid" %}
+                {% render_field profile_form.date_of_birth class="form-control is-valid" %}
             {% endif %}
         {% else %}
-            {% render_field field class="form-control" %}
+            {% render_field profile_form.date_of_birth class="form-control" %}
         {% endif %}
-    {% endfor %}
+
 
     <div class="container-fluid p-0 mt-4">
         <div class="row m-0">

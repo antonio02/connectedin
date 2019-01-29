@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout as django_logout, up
 from profiles.forms import NewProfileForm
 from django.utils.translation import ugettext_lazy as _
 from profiles.views import profile
+from django.db import transaction
 
 
 # Create your views here.
@@ -31,9 +32,10 @@ class SignUpView(View):
     def get(self, request):
         return self.render_form(request)
 
+    @transaction.atomic
     @method_decorator(require_anon)
     def post(self, request):
-        profile_form = NewProfileForm(request.POST)
+        profile_form = NewProfileForm(request.POST, request.FILES)
         user_form = NewUserForm(request.POST)
 
         if profile_form.is_valid() and user_form.is_valid():
@@ -86,6 +88,7 @@ class ChangePasswordView(View):
             'change_form': ChangePasswordForm(),
         })
 
+    @transaction.atomic
     @method_decorator(login_required)
     def post(self, request):
         change_form = ChangePasswordForm(request.POST)
@@ -118,6 +121,7 @@ class DeactivateProfileView(View):
             'deactivate_form': DeactivateProfileForm(),
         })
 
+    @transaction.atomic
     @method_decorator(login_required)
     def post(self, request):
         deactivate_form = DeactivateProfileForm(request.POST)
@@ -139,6 +143,7 @@ class ActivateProfileView(View):
     def get(self, request):
         return render(request, self.template_name)
 
+    @transaction.atomic
     @method_decorator(login_required)
     def post(self, request):
         request.user.is_active = True

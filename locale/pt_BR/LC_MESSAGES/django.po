@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-28 00:15+0000\n"
+"POT-Creation-Date: 2019-01-29 02:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,7 +42,7 @@ msgid "All profiles"
 msgstr "Todos os perfis"
 
 #: posts/templates/admin_timeline.html:26
-#: posts/templates/admin_timeline.html:61 posts/templates/timeline.html:29
+#: posts/templates/admin_timeline.html:89 posts/templates/timeline.html:29
 #: posts/templates/timeline.html:60
 msgid "Invitations"
 msgstr "Convites"
@@ -51,84 +51,104 @@ msgstr "Convites"
 msgid "You have no contacts."
 msgstr "Você não tem contatos"
 
-#: posts/templates/admin_timeline.html:53
+#: posts/templates/admin_timeline.html:58
+#: posts/templates/layouts/posts_list.html:14
+msgid "Previous"
+msgstr "Anterior"
+
+#: posts/templates/admin_timeline.html:74
+#: posts/templates/layouts/posts_list.html:30
+msgid "Next"
+msgstr "Proximo"
+
+#: posts/templates/admin_timeline.html:81
 msgid "You have all profiles in contacts or pending invitations."
 msgstr "Você já tem todos os perfis nos contatos ou convites pendentes."
 
-#: posts/templates/admin_timeline.html:62 posts/templates/timeline.html:61
+#: posts/templates/admin_timeline.html:90 posts/templates/timeline.html:61
 msgid "Received"
 msgstr "Recebido"
 
-#: posts/templates/admin_timeline.html:88 posts/templates/timeline.html:87
+#: posts/templates/admin_timeline.html:116 posts/templates/timeline.html:87
 msgid "No invitation received."
 msgstr "Nenhum convite recebido."
 
-#: posts/templates/admin_timeline.html:90 posts/templates/timeline.html:89
+#: posts/templates/admin_timeline.html:118 posts/templates/timeline.html:89
 #: users/templates/password_reset_done.html:12
 msgid "Sent"
 msgstr "Enviado"
 
-#: posts/templates/admin_timeline.html:116 posts/templates/timeline.html:115
+#: posts/templates/admin_timeline.html:144 posts/templates/timeline.html:115
 msgid "No invitation sent."
 msgstr "Nenhum convite enviado."
+
+#: posts/templates/cards/invitation_card.html:17
+#: profiles/templates/profile_header.html:66
+#: searchs/templates/layouts/profile_card.html:22
+msgid "Cancel invitation"
+msgstr "Cancelar convite"
+
+#: posts/templates/cards/invitation_card.html:26
+#: profiles/templates/profile_header.html:69
+#: searchs/templates/layouts/profile_card.html:31
+msgid "Accept invitation"
+msgstr "Aceitar convite"
+
+#: posts/templates/cards/invitation_card.html:28
+#: profiles/templates/profile_header.html:71
+#: searchs/templates/layouts/profile_card.html:33
+msgid "Decline invitation"
+msgstr "Rejeitar convite"
+
+#: posts/templates/cards/post_card.html:9
+msgid "Post options"
+msgstr "Mais opções"
+
+#: posts/templates/cards/post_card.html:21
+msgid "Delete (Admin)"
+msgstr "Apagar (Admin)"
+
+#: posts/templates/cards/post_card.html:23
+#: posts/templates/cards/post_card.html:44
+msgid "Delete"
+msgstr "Apagar"
+
+#: posts/templates/cards/post_card.html:36
+msgid "Are you sure you want to delete this post?"
+msgstr "Tem certeza que deseja excluir essa publicação?"
+
+#: posts/templates/cards/post_card.html:42
+#: profiles/templates/profile_header.html:46
+msgid "Close"
+msgstr "Fechar"
+
+#: posts/templates/cards/post_card.html:50
+#, python-format
+msgid "Profile picture of %(name)s"
+msgstr "Foto de perfil de %(name)s"
 
 #: posts/templates/forms/new_post_form.html:19
 msgid "Publish"
 msgstr "Publicar"
 
-#: posts/templates/layouts/invitation_card.html:17
-#: profiles/templates/profile_header.html:48
-#: searchs/templates/layouts/profile_card.html:22
-msgid "Cancel invitation"
-msgstr "Cancelar convite"
-
-#: posts/templates/layouts/invitation_card.html:26
-#: profiles/templates/profile_header.html:51
-#: searchs/templates/layouts/profile_card.html:31
-msgid "Accept invitation"
-msgstr "Aceitar convite"
-
-#: posts/templates/layouts/invitation_card.html:28
-#: profiles/templates/profile_header.html:53
-#: searchs/templates/layouts/profile_card.html:33
-msgid "Decline invitation"
-msgstr "Rejeitar convite"
-
-#: posts/templates/layouts/post_card.html:9
-msgid "Post options"
-msgstr "Mais opções"
-
-#: posts/templates/layouts/post_card.html:17
-#: profiles/templates/profile_header.html:23
-msgid "Are you sure?"
-msgstr "Tem certeza?"
-
-#: posts/templates/layouts/post_card.html:22
-msgid "Delete (Admin)"
-msgstr "Apagar (Admin)"
-
-#: posts/templates/layouts/post_card.html:24
-msgid "Delete"
-msgstr "Apagar"
-
-#: posts/templates/layouts/post_card.html:32
-#, python-format
-msgid "Profile picture of %(name)s"
-msgstr "Foto de perfil de %(name)s"
-
 #: posts/templates/timeline.html:24
 msgid "Posts"
 msgstr "Publicações"
+
+#: posts/views.py:83
+msgid "Post deleted"
+msgstr "Publicação deletada"
 
 #: profiles/forms.py:10
 msgid "Date of birth"
 msgstr "Data de nascimento"
 
-#: profiles/forms.py:29
+#: profiles/forms.py:30
 msgid "You must be over 13 years old"
 msgstr "Você deve ter mais de 13 anos"
 
 #: profiles/templates/profile_header.html:24
+#: profiles/templates/profile_header.html:47
 msgid "Block"
 msgstr "Bloquear"
 
@@ -136,16 +156,21 @@ msgstr "Bloquear"
 msgid "Give admin"
 msgstr "Tornar admin"
 
-#: profiles/templates/profile_header.html:37
+#: profiles/templates/profile_header.html:40
+#, python-format
+msgid "Are you sure you want to block %(first_name)s ? "
+msgstr "Tem certeza que deseja blockear %(first_name)s ? "
+
+#: profiles/templates/profile_header.html:55
 msgid "Profile cover"
 msgstr "Perfis"
 
-#: profiles/templates/profile_header.html:45
+#: profiles/templates/profile_header.html:63
 #: searchs/templates/layouts/profile_card.html:39
 msgid "Invite"
 msgstr "Convidar"
 
-#: profiles/templates/profile_header.html:56
+#: profiles/templates/profile_header.html:74
 #: searchs/templates/layouts/profile_card.html:16
 msgid "Remove from contacts"
 msgstr "Remover dos contatos"
@@ -301,11 +326,11 @@ msgstr "Nova Senha"
 msgid "Send"
 msgstr "Enviar"
 
-#: users/templates/forms/signup_form.html:63
+#: users/templates/forms/signup_form.html:79
 msgid "Create Account"
 msgstr "Criar Conta"
 
-#: users/templates/forms/signup_form.html:64
+#: users/templates/forms/signup_form.html:80
 msgid "Already have an account?"
 msgstr "Já tem uma conta?"
 
@@ -334,6 +359,9 @@ msgstr ""
 msgid "Recover password"
 msgstr "Nova Senha"
 
-#: users/views.py:100 users/views.py:106
+#: users/views.py:103 users/views.py:109
 msgid "Old password is incorrect"
 msgstr "A senha antiga está incorreta"
+
+#~ msgid "Are you sure?"
+#~ msgstr "Tem certeza?"

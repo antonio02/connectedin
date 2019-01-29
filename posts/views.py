@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.utils.translation import ugettext_lazy as _
 from profiles.models import Profile
 from .models import Post
 from .forms import PostForm
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -17,6 +19,11 @@ def index(request):
          ~Q(profile__in=user_profile.blocked_contacts.all()),
          ~Q(profile__user__is_active=False)
         ).order_by('-post_date').all()
+
+        paginador = Paginator(posts, 10)
+        page = request.GET.get('page')
+        posts = paginador.get_page(page)
+
         contacts = user_profile.contacts.filter(
             ~Q(user__in=[i.user for i in user_profile.blocked_contacts.all()]),
             user__is_active=True).all()
@@ -40,6 +47,11 @@ def admin_timeline(request):
                                            Q(user__in=[i.user for i in contacts]) |
                                            Q(received_invitations__sender=user_profile) |
                                            Q(sent_invitations__receiver=user_profile)).all()
+
+    paginador = Paginator(all_profiles, 10)
+    page = request.GET.get('page')
+    all_profiles = paginador.get_page(page)
+
     return render(request, 'admin_timeline.html',
                   {'all_profiles': all_profiles,
                    'contacts': contacts,
@@ -68,7 +80,7 @@ def delete_post(request, post_id):
         else:
             post = Post.objects.get(id=post_id, profile__user=request.user)
         post.delete()
-        return HttpResponse(status=200)
+        return JsonResponse(status=200, data={'message': _('Post deleted')})
     except Post.DoesNotExist:
         return HttpResponse(status=404)
     

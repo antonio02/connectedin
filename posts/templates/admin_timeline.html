@@ -49,6 +49,34 @@
             {% for profile in all_profiles %}
                 {% include 'layouts/profile_card.html' with profile=profile %}
             {% endfor %}
+
+            {% if all_profiles.paginator.count > 10 %}
+
+                <ul class="pagination">
+                    {% if all_profiles.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="{% url 'admin_timeline' %}?page={{ all_profiles.previous_page_number }}" tabindex="-1">{% trans 'Previous' %}</a>
+                        </li>
+                    {% endif %}
+
+                    {% for num in all_profiles.paginator.page_range %}
+                        {% if all_profiles.number == num %}
+                            <li class="page-item active">
+                                <a class="page-link" href="#">{{ num }} <span class="sr-only">(current)</span></a>
+                            </li>
+                        {% elif num > all_profiles.number|add:'-3' and num < all_profiles.number|add:3 %}
+                             <li class="page-item"><a class="page-link" href="{% url 'admin_timeline' %}?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if all_profiles.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="{% url 'admin_timeline' %}?page={{ all_profiles.next_page_number }}">{% trans 'Next' %}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+
+            {% endif %}
         {% else %}
             <p class="text-muted ml-3">{% trans 'You have all profiles in contacts or pending invitations.' %}</p>
         {% endif %}
@@ -66,11 +94,11 @@
                             {% for invitation in received_invitations %}
                                 {% if forloop.first %}
                                     <div class="carousel-item visible active">
-                                        {% include 'layouts/invitation_card.html' %}
+                                        {% include 'cards/invitation_card.html' %}
                                     </div>
                                 {% else %}
                                     <div class="carousel-item">
-                                        {% include 'layouts/invitation_card.html' %}
+                                        {% include 'cards/invitation_card.html' %}
                                     </div>
                                 {% endif %}
                             {% endfor %}
@@ -94,11 +122,11 @@
                             {% for invitation in sent_invitations %}
                                 {% if forloop.first %}
                                     <div class="carousel-item active">
-                                        {% include 'layouts/invitation_card.html' %}
+                                        {% include 'cards/invitation_card.html' %}
                                     </div>
                                 {% else %}
                                     <div class="carousel-item">
-                                        {% include 'layouts/invitation_card.html' %}
+                                        {% include 'cards/invitation_card.html' %}
                                     </div>
                                 {% endif %}
                             {% endfor %}
