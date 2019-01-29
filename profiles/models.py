@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.contrib.auth.models import User
 from django import template
 
@@ -21,6 +21,7 @@ class Invitation(models.Model):
     sender      = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='sent_invitations' )
     receiver    = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='received_invitations')
 
+    @transaction.atomic
     def accept(self):
         self.sender.contacts.add(self.receiver)
         self.receiver.contacts.add(self.sender)

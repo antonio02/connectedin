@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.utils.translation import ugettext_lazy as _
 from profiles.models import Profile
 from .models import Post
 from .forms import PostForm
@@ -79,7 +80,7 @@ def delete_post(request, post_id):
         else:
             post = Post.objects.get(id=post_id, profile__user=request.user)
         post.delete()
-        return HttpResponse(status=200)
+        return JsonResponse(status=200, data={'message': _('Post deleted')})
     except Post.DoesNotExist:
         return HttpResponse(status=404)
     
