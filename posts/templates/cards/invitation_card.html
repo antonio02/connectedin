@@ -3,11 +3,12 @@
 <div class="card">
     <div class="card-body p-0">
         <div class="d-flex flex-column flex-wrap align-items-center justify-content-center p-3 m-0">
-            <img style="width: 50px; height: 50px;"
-                 id="post-profile-thumbnail"
-                 src="https://picsum.photos/50/?random"
-                 class="img-thumbnail">
+
             {% if user.username == invitation.sender.user.username %}
+                <img style="width: 50px; height: 50px; object-fit: cover;"
+                 id="post-profile-thumbnail"
+                 src="{{ invitation.receiver.photo.url }}"
+                 class="img-thumbnail">
                 <a href="{% url 'profile' invitation.receiver.user.username %}" class="text-center">
                 <h5 class="card-title d-inline m-0 ml-2">{{ invitation.receiver.user.get_full_name }}</h5>
                 </a>
@@ -17,6 +18,10 @@
                         class="btn btn-danger mb-2 btn-sm">{% trans 'Cancel invitation' %}</button>
                 </div>
             {% elif user.username == invitation.receiver.user.username %}
+                <img style="width: 50px; height: 50px; object-fit: cover;"
+                 id="post-profile-thumbnail"
+                 src="{{ invitation.sender.photo.url }}"
+                 class="img-thumbnail">
                 <a href="{% url 'profile' invitation.sender.user.username %}" class="text-center">
                     <h5 class="card-title d-inline m-0 ml-2">{{ invitation.sender.user.get_full_name }}</h5>
                 </a>

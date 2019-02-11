@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from profiles.models import Profile
 from .models import Post
@@ -7,6 +7,7 @@ from .forms import PostForm
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 # Create your views here.
 
@@ -62,15 +63,20 @@ def admin_timeline(request):
 @login_required
 def new_post(request):
     if request.method == 'POST':
-        post_text = request.POST.get('post_text', None) 
-        if post_text:
+        post_form = PostForm(request.POST, request.FILES)
+        if post_form.is_valid():
             user_profile = Profile.objects.get(user=request.user)
-            Post.objects.create(profile=user_profile, post_text=post_text)
-            return HttpResponse(status=200)
+            post = post_form.save(commit=False)
+            post.profile = user_profile
+            post.save()
+            messages.success(request, _('Post created successfully'))
+            return redirect('index')
         else:
-            return HttpResponse(status=400)
+            messages.error(request, _('Invalid data for new post'))
+            return redirect('index')
     else:
-        return HttpResponse(status=400)
+        messages.error(request, _('Method not allowed'))
+        return redirect('index')
 
 @login_required
 def delete_post(request, post_id):
@@ -80,8 +86,10 @@ def delete_post(request, post_id):
         else:
             post = Post.objects.get(id=post_id, profile__user=request.user)
         post.delete()
-        return JsonResponse(status=200, data={'message': _('Post deleted')})
+        messages.success(request, _('Post deleted successfully'))
+        return HttpResponse(status=200)
     except Post.DoesNotExist:
+        messages.error(request, _('Post not found'))
         return HttpResponse(status=404)
     
 

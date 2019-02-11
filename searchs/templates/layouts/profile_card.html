@@ -3,8 +3,8 @@
 <div class="card mb-4">
     <div class="card-body p-0">
         <div class="d-flex flex-column flex-wrap align-items-center justify-content-center p-3 m-0">
-            <img style="width: 75px; height: 75px;"
-            id="post-profile-thumbnail" src="https://picsum.photos/50/?random" class="img-thumbnail">
+            <img style="width: 75px; height: 75px; object-fit: cover;"
+            id="post-profile-thumbnail" src="{{ profile.photo.url }}" class="img-thumbnail">
                 <a href="{% url 'profile' profile.user.username %}">
                 <h4 class="card-title d-inline m-0 ml-2">{{ profile.user.get_full_name }}</h4>
                 </a>

@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="{% static 'js/vendor/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'js/vendor/popper.min.js' %}" async></script>
+    <script src="{% static 'js/vendor/popper.min.js' %}"></script>
     <script src="{% static 'js/vendor/bootstrap.min.js' %}" async defer></script>
     <script src="{% static 'js/main.js' %}" async></script>
     {% block title %}
@@ -21,7 +21,16 @@
 
 <main class="container-fluid d-inline-flex flex-column min-vh-100 p-0">
 
-
+    {% for message in messages %}
+        <div id="message" class="row fixed-bottom mx-5 my-3 justify-content-center fade show">
+            <div class="alert {{ message.tags }} alert-dismissible d-inline" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
     {% if user.is_authenticated %}
         {% include 'nav_header_logged.html' %}
     {% else %}
@@ -35,6 +44,12 @@
     </div>
 </main>
 
+<script>
+    $( document ).ready(function () {
+        var message = $("#message");
+        setTimeout(function(){ message.removeClass('show'); }, 2000);
+    })
+</script>
 
 </body>
 </html>

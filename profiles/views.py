@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import Profile, Invitation
@@ -5,6 +6,7 @@ from django.db.models import Q
 from .decorators import *
 from django.db import transaction
 from django.core.paginator import Paginator
+from django.utils.translation import ugettext_lazy as _
 
 
 # Create your views here.
@@ -58,6 +60,7 @@ def invite_profile(request, username, profile=None, user_profile=None):
         profile = Profile.objects.get(user=User.objects.get(username=username))
 
     if profile.contacts.filter(user=request.user).exists():
+        messages.warning(request, _('Profile already in contacts'))
         return HttpResponse(status=400)
 
     if user_profile is None:
@@ -65,8 +68,10 @@ def invite_profile(request, username, profile=None, user_profile=None):
 
     if (Invitation.objects.filter(
             Q(receiver=profile, sender=user_profile) | Q(receiver=user_profile, sender=profile)).exists()):
+        messages.warning(request, _('There is a pending invitation'))
         return HttpResponse(status=400)
     else:
+        messages.success(request, _('Invitation sent'))
         Invitation.objects.create(sender=user_profile, receiver=profile)
         return HttpResponse(status=200)
 
@@ -77,10 +82,13 @@ def accept_invitation(request, invitation_id):
         invitation = Invitation.objects.get(id=invitation_id, sender__user__is_active=True)
         if invitation.receiver.user == request.user:
             invitation.accept()
+            messages.success(request, _('Invitation accepted'))
             return HttpResponse(status=200)
         else:
+            messages.error(request, _('Invitation not found'))
             return HttpResponse(status=403)
     except Invitation.DoesNotExist:
+        messages.error(request, _('Invitation not found'))
         return HttpResponse(status=404)
 
 
@@ -90,10 +98,13 @@ def decline_invitation(request, invitation_id):
         invitation = Invitation.objects.get(id=invitation_id, sender__user__is_active=True)
         if invitation.receiver.user == request.user:
             invitation.decline()
+            messages.success(request, _('Invitation declined'))
             return HttpResponse(status=200)
         else:
-            return HttpResponse(status=403)
+            messages.error(request, _('Invitation not found'))
+            return HttpResponse(status=404)
     except Invitation.DoesNotExist:
+        messages.error(request, _('Invitation not found'))
         return HttpResponse(status=404)
 
 
@@ -103,10 +114,13 @@ def cancel_invitation(request, invitation_id):
         invitation = Invitation.objects.get(id=invitation_id, receiver__user__is_active=True)
         if invitation.sender.user == request.user:
             invitation.cancel()
+            messages.success(request, _('Invitation canceled'))
             return HttpResponse(status=200)
         else:
-            return HttpResponse(status=403)
+            messages.error(request, _('Invitation not found'))
+            return HttpResponse(status=404)
     except Invitation.DoesNotExist:
+        messages.error(request, _('Invitation not found'))
         return HttpResponse(status=404)
 
 
@@ -119,10 +133,13 @@ def remove_contact(request, username):
         remove_profile = user_profile.contacts.get(user__username=username, user__is_active=True)
         user_profile.contacts.remove(remove_profile)
         remove_profile.contacts.remove(user_profile)
+        messages.success(request, _('%(first_name)s removed from contacts' % {'first_name': remove_profile.user.first_name}))
         return HttpResponse(status=200)
     except User.DoesNotExist:
+        messages.error(request, _('Profile not found'))
         return HttpResponse(status=404)
     except Profile.DoesNotExist:
+        messages.error(request, _('Profile not found'))
         return HttpResponse(status=404)
 
 
@@ -130,15 +147,18 @@ def remove_contact(request, username):
 @require_other_profile
 def give_super(request, username):
     if not request.user.is_superuser:
+        messages.error(request, _('You need to be a Admin'))
         return HttpResponse(status=403)
 
     try:
         user = User.objects.get(username=username)
         user.is_superuser = True
         user.save()
+        messages.success(request, _('This profile is now a admin'))
         return HttpResponse(status=200)
 
     except User.DoesNotExist:
+        messages.error(request, _('Profile not found'))
         return HttpResponse(status=404)
 
 
@@ -151,17 +171,20 @@ def block_profile(request, username, profile=None, user_profile=None):
         profile = Profile.objects.get(user__username=username)
 
     if profile.user.is_superuser:
+        messages.warning(request, _('You cannot block a admin'))
         return HttpResponse(status=400)
 
     if user_profile is None:
         user_profile = Profile.objects.get(user__username=request.user.username)
 
     if user_profile.blocked_contacts.filter(user__username=username).exists():
+        messages.warning(request, _('You already blocked this profile'))
         return HttpResponse(status=400)
 
     user_profile.blocked_contacts.add(profile)
     Invitation.objects.filter(
         Q(receiver=profile, sender=user_profile) | Q(receiver=user_profile, sender=profile)).delete()
+    messages.success(request, _('%(first_name)s blocked' % {'first_name': profile.user.first_name}))
     return redirect('index')
 
 
@@ -175,7 +198,9 @@ def unblock_profile(request, username, profile=None):
     user_profile = Profile.objects.get(user__username=request.user.username)
 
     if not user_profile.blocked_contacts.filter(user__username=username).exists():
+        messages.warning(request, _('This profile is not blocked'))
         return HttpResponse(status=400)
 
     user_profile.blocked_contacts.remove(profile)
+    messages.success(request, _('%(first_name)s unblocked' % {'first_name': profile.user.first_name}))
     return HttpResponse(status=200)

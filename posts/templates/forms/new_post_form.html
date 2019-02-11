@@ -2,7 +2,7 @@
 {% load i18n %}
 
 <form id="new-post-form" class="form-group row m-0 justify-content-end" 
-action="{% url 'new_post' %}" method="post">
+action="{% url 'new_post' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <h3 class="col-12">{% trans 'New Post' %}</h3>
 
@@ -15,6 +15,7 @@ action="{% url 'new_post' %}" method="post">
     {% endif %}
 
     {% render_field post_form.post_text class="form-control col-12" rows="3" aria-label="Post text" %}
+    {% render_field post_form.image class="form-control-file" %}
 
     <input class="btn btn-primary mt-2 col-6" type="submit" value="{% trans 'Publish' %}">
 

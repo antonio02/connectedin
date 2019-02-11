@@ -44,7 +44,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Close' %}</button>
-                        <a href="{% url 'block_profile' profile.user.username %}" type="button" class="btn btn-danger">{% trans 'Block' %}</a>
+                        <button onclick="call_url('{% url 'block_profile' profile.user.username %}')" type="button" class="btn btn-danger">{% trans 'Block' %}</button>
                     </div>
                 </div>
             </div>
