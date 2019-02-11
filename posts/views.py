@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from profiles.models import Profile
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -30,6 +30,7 @@ def index(request):
             user__is_active=True).all()
         return render(request, 'timeline.html',
                       {'post_form': PostForm(),
+                       'comment_form': CommentForm(),
                        'user_profile': user_profile,
                        'posts': posts,
                        'received_invitations': user_profile.received_invitations.filter(
@@ -132,5 +133,33 @@ def dislike_post(request, post_id):
     except Post.DoesNotExist:
         messages.error(request, _('Post not found'))
         return HttpResponse(status=404)
+
+@login_required
+def comment_post(request, post_id):
+    if request.method == 'POST':
+        try:
+            if request.user.is_superuser:
+                post = Post.objects.get(id=post_id)
+            else:
+                post = Post.objects.get(id=post_id, profile__user=request.user)
+
+            user_profile = Profile.objects.get(user=request.user)
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid():
+                comment = comment_form.save(commit=False)
+                comment.profile = user_profile
+                comment.post = post
+                comment.save()
+                messages.success(request, _('Comment created'))
+                return HttpResponse(status=200)
+            else:
+                messages.error(request, _('Error'))
+                return HttpResponse(status=400)
+        except Post.DoesNotExist:
+            messages.error(request, _('Post not found'))
+            return HttpResponse(status=404)
+    else:
+        messages.error(request, _('Method not allowed'))
+        return HttpResponse(status=405)
     
 

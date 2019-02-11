@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-11 03:06+0000\n"
+"POT-Creation-Date: 2019-02-11 08:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,13 +26,18 @@ msgstr ""
 msgid "Brazilian portuguese"
 msgstr "Português do Brasil"
 
-#: posts/forms.py:9 posts/templates/forms/new_post_form.html:7
+#: posts/forms.py:10 posts/templates/forms/new_post_form.html:7
 msgid "New Post"
 msgstr "Nova Publicação"
 
+#: posts/forms.py:23 posts/templates/cards/post_card.html:94
+#: posts/templates/timeline.html:141 profiles/templates/profile.html:34
+msgid "Comment"
+msgstr "Comentar"
+
 #: posts/templates/admin_timeline.html:16
-#: posts/templates/admin_timeline.html:33 posts/templates/timeline.html:18
-#: posts/templates/timeline.html:36
+#: posts/templates/admin_timeline.html:33 posts/templates/timeline.html:19
+#: posts/templates/timeline.html:37
 msgid "Contacts"
 msgstr "Contatos"
 
@@ -42,12 +47,12 @@ msgid "All profiles"
 msgstr "Todos os perfis"
 
 #: posts/templates/admin_timeline.html:26
-#: posts/templates/admin_timeline.html:89 posts/templates/timeline.html:28
-#: posts/templates/timeline.html:59
+#: posts/templates/admin_timeline.html:89 posts/templates/timeline.html:29
+#: posts/templates/timeline.html:60
 msgid "Invitations"
 msgstr "Convites"
 
-#: posts/templates/admin_timeline.html:40 posts/templates/timeline.html:42
+#: posts/templates/admin_timeline.html:40 posts/templates/timeline.html:43
 msgid "You have no contacts."
 msgstr "Você não tem contatos"
 
@@ -65,20 +70,20 @@ msgstr "Proximo"
 msgid "You have all profiles in contacts or pending invitations."
 msgstr "Você já tem todos os perfis nos contatos ou convites pendentes."
 
-#: posts/templates/admin_timeline.html:90 posts/templates/timeline.html:60
+#: posts/templates/admin_timeline.html:90 posts/templates/timeline.html:61
 msgid "Received"
 msgstr "Recebido"
 
-#: posts/templates/admin_timeline.html:116 posts/templates/timeline.html:86
+#: posts/templates/admin_timeline.html:116 posts/templates/timeline.html:89
 msgid "No invitation received."
 msgstr "Nenhum convite recebido."
 
-#: posts/templates/admin_timeline.html:118 posts/templates/timeline.html:88
+#: posts/templates/admin_timeline.html:118 posts/templates/timeline.html:91
 #: users/templates/password_reset_done.html:12
 msgid "Sent"
 msgstr "Enviado"
 
-#: posts/templates/admin_timeline.html:144 posts/templates/timeline.html:114
+#: posts/templates/admin_timeline.html:144 posts/templates/timeline.html:119
 msgid "No invitation sent."
 msgstr "Nenhum convite enviado."
 
@@ -109,7 +114,7 @@ msgid "Delete (Admin)"
 msgstr "Apagar (Admin)"
 
 #: posts/templates/cards/post_card.html:23
-#: posts/templates/cards/post_card.html:44
+#: posts/templates/cards/post_card.html:46
 msgid "Delete"
 msgstr "Apagar"
 
@@ -117,43 +122,80 @@ msgstr "Apagar"
 msgid "Are you sure you want to delete this post?"
 msgstr "Tem certeza que deseja excluir essa publicação?"
 
-#: posts/templates/cards/post_card.html:42
-#: profiles/templates/profile_header.html:46
+#: posts/templates/cards/post_card.html:43 posts/templates/timeline.html:140
+#: profiles/templates/profile.html:33 profiles/templates/profile_header.html:46
 msgid "Close"
 msgstr "Fechar"
 
-#: posts/templates/cards/post_card.html:50
+#: posts/templates/cards/post_card.html:52
 #, python-format
 msgid "Profile picture of %(name)s"
 msgstr "Foto de perfil de %(name)s"
+
+#: posts/templates/cards/post_card.html:73
+msgid "Likes"
+msgstr "Curtidas"
+
+#: posts/templates/cards/post_card.html:76
+msgid "Comments"
+msgstr "Commentarios"
+
+#: posts/templates/cards/post_card.html:87
+#: posts/templates/cards/post_card.html:91
+msgid "Like"
+msgstr "Curtir"
 
 #: posts/templates/forms/new_post_form.html:20
 msgid "Publish"
 msgstr "Publicar"
 
-#: posts/templates/timeline.html:23
+#: posts/templates/timeline.html:24
 msgid "Posts"
 msgstr "Publicações"
 
-#: posts/views.py:72
+#: posts/views.py:74
 msgid "Post created successfully"
 msgstr "Publicação criada com sucesso"
 
-#: posts/views.py:75
+#: posts/views.py:77
 msgid "Invalid data for new post"
 msgstr "Dados invalidos para criar a publicação"
 
-#: posts/views.py:78
+#: posts/views.py:80 posts/views.py:162
 msgid "Method not allowed"
 msgstr "Metodo não permitido"
 
-#: posts/views.py:89
+#: posts/views.py:91
 msgid "Post deleted successfully"
 msgstr "Publicação deletada com sucesso"
 
-#: posts/views.py:92
+#: posts/views.py:94 posts/views.py:114 posts/views.py:134 posts/views.py:159
 msgid "Post not found"
 msgstr "Publicação não encontrada"
+
+#: posts/views.py:107
+msgid "You already liked this post"
+msgstr "Você já curtiu essa postagem"
+
+#: posts/views.py:111
+msgid "Post liked"
+msgstr "Postagem curtida"
+
+#: posts/views.py:128
+msgid "Post disliked"
+msgstr "Postage descurtida"
+
+#: posts/views.py:131
+msgid "You did not like this post"
+msgstr "Você não curtiu essa postagem"
+
+#: posts/views.py:153
+msgid "Comment created"
+msgstr "Comentario criado"
+
+#: posts/views.py:156
+msgid "Error"
+msgstr "Erro"
 
 #: profiles/forms.py:10
 msgid "Date of birth"
@@ -191,70 +233,70 @@ msgstr "Convidar"
 msgid "Remove from contacts"
 msgstr "Remover dos contatos"
 
-#: profiles/views.py:63
+#: profiles/views.py:70
 msgid "Profile already in contacts"
 msgstr "Você não tem contatos"
 
-#: profiles/views.py:71
+#: profiles/views.py:78
 msgid "There is a pending invitation"
 msgstr "Já existe um convite pendente"
 
-#: profiles/views.py:74
+#: profiles/views.py:81
 msgid "Invitation sent"
 msgstr "Convite enviado"
 
-#: profiles/views.py:85
+#: profiles/views.py:92
 msgid "Invitation accepted"
 msgstr "Convite aceito"
 
-#: profiles/views.py:88 profiles/views.py:91 profiles/views.py:104
-#: profiles/views.py:107 profiles/views.py:120 profiles/views.py:123
+#: profiles/views.py:95 profiles/views.py:98 profiles/views.py:111
+#: profiles/views.py:114 profiles/views.py:127 profiles/views.py:130
 msgid "Invitation not found"
 msgstr "Convite não encontrado"
 
-#: profiles/views.py:101
+#: profiles/views.py:108
 msgid "Invitation declined"
 msgstr "Convite recusado"
 
-#: profiles/views.py:117
+#: profiles/views.py:124
 msgid "Invitation canceled"
 msgstr "Convite cancelado"
 
-#: profiles/views.py:136
+#: profiles/views.py:143
 #, python-format
 msgid "%(first_name)s removed from contacts"
 msgstr "%(first_name)s removido dos contados"
 
-#: profiles/views.py:139 profiles/views.py:142 profiles/views.py:161
+#: profiles/views.py:146 profiles/views.py:149 profiles/views.py:168
 msgid "Profile not found"
 msgstr "Nenhum perfil encontrado :("
 
-#: profiles/views.py:150
+#: profiles/views.py:157
 msgid "You need to be a Admin"
 msgstr "Você precisa ser um Administrador"
 
-#: profiles/views.py:157
+#: profiles/views.py:164
 msgid "This profile is now a admin"
 msgstr "Esse perfil agora é um Administrador"
 
-#: profiles/views.py:174
+#: profiles/views.py:181
 msgid "You cannot block a admin"
 msgstr "Você não pode bloquear um Administrador"
 
-#: profiles/views.py:181
+#: profiles/views.py:188
 msgid "You already blocked this profile"
 msgstr "Você ja bloqueou esse perfil"
 
-#: profiles/views.py:187
+#: profiles/views.py:194
 #, python-format
 msgid "%(first_name)s blocked"
 msgstr "%(first_name)s bloqueado"
 
-#: profiles/views.py:201
+#: profiles/views.py:208
 msgid "This profile is not blocked"
 msgstr "Esse perfil não esta bloqueado"
 
-#: profiles/views.py:205
+#: profiles/views.py:212
 #, python-format
 msgid "%(first_name)s unblocked"
 msgstr "%(first_name)s desbloqueado"
@@ -441,7 +483,7 @@ msgstr ""
 
 #: users/templates/reset_password.html:5
 msgid "Recover password"
-msgstr "Nova Senha"
+msgstr "Recuperar senha"
 
 #: users/views.py:20
 msgid "Logout successfully"

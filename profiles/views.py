@@ -1,6 +1,8 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+
+from posts.forms import CommentForm
 from .models import Profile, Invitation
 from django.db.models import Q
 from .decorators import *
@@ -24,6 +26,7 @@ def profile(request, username, profile=None, user_profile=None):
     if request.user.is_authenticated:
         if request.user.username == username:
             return render(request, 'profile.html', {'profile': profile,
+                                                    'comment_form': CommentForm(),
                                                     'user_profile': Profile.objects.get(user=request.user),
                                                     'posts': posts})
 
@@ -47,6 +50,7 @@ def profile(request, username, profile=None, user_profile=None):
             friendship = 3
 
         return render(request, 'profile.html', {'user_profile': Profile.objects.get(user=request.user),
+                                                'comment_form': CommentForm(),
                                                 'profile': profile,
                                                 'friendship': friendship,
                                                 'invitation': invitation,

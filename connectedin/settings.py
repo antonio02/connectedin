@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'profiles',
     'posts',
     'searchs',
+    'api',
 
     'widget_tweaks',
     'rest_framework',

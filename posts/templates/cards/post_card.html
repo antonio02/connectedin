@@ -67,24 +67,43 @@
         {% if post.image %}
             <img src="{{ post.image.url }}" style="max-width: 100%">
         {% endif %}
-    {% if post.likes.all %}
-        <p class="text-primary mx-3 my-1">{{ post.likes.count }} likes</p>
-    {% endif %}
+        <hr class="m-0">
+        <div class="d-flex flex-row justify-content-between">
+            {% if post.likes.all %}
+                <p class="text-primary mx-3 my-1">{{ post.likes.count }} {% trans 'Likes' %}</p>
+            {% endif %}
+            {% if post.comment_set.all %}
+                <p class="text-primary mx-3 my-1">{{ post.comment_set.count }} {% trans 'Comments' %}</p>
+            {% endif %}
+        </div>
+
         <hr class="m-0">
         {% if user.is_authenticated %}
-            <div class="btn-group m-2">
+            <div class="btn-group m-2 d-flex justify-content-between">
                 {% if user_profile in post.likes.all %}
 
                     <button onclick="call_url('{% url 'dislike_post' post.id %}')"
                             type="button" class="btn btn-outline-primary"
-                            data-dismiss="modal">{% trans 'Dislike' %}</button>
+                            data-dismiss="modal">{% trans 'Like' %}</button>
 
                 {% else %}
                     <button onclick="call_url('{% url 'like_post' post.id %}')"
                             type="button" class="btn btn-primary" data-dismiss="modal">{% trans 'Like' %}</button>
                 {% endif %}
+                <button onclick="commentModal({{ post.id }})"
+                        class="btn btn-link">{% trans 'Comment' %}
+                </button>
 
             </div>
         {% endif %}
+        <ul class="list-group list-group-flush">
+            {% for comment in post.comment_set.all %}
+                <div class="list-group-item d-flex flex-row">
+                    <a href="{% url 'profile' post.profile.user.username %}"
+                       class="mr-2">{{ post.profile.user.first_name }}:</a>
+                    <p>{{ comment.comment_text }}</p>
+                </div>
+            {% endfor %}
+        </ul>
     </div>
 </div>

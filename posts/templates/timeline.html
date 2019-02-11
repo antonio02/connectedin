@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load widget_tweaks %}
 
 {% block title %}
     <meta name="Description" content="Timeline">
@@ -34,13 +35,13 @@
                  class="col-12 col-md-10 col-lg-2 d-lg-block p-0 bg-white tab-pane">
                 <div class="conteiner-fluid p-3 sticky-top">
                     <h3>{% trans 'Contacts' %}</h3>
-                {% if contacts %}
-                    {% for contact in contacts %}
-                        {% include 'cards/contact_card.html' with contact=contact %}
-                    {% endfor %}
-                {% else %}
-                    <p class="text-muted ml-3">{% trans 'You have no contacts.' %}</p>
-                {% endif %}
+                    {% if contacts %}
+                        {% for contact in contacts %}
+                            {% include 'cards/contact_card.html' with contact=contact %}
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted ml-3">{% trans 'You have no contacts.' %}</p>
+                    {% endif %}
                 </div>
             </nav>
 
@@ -73,11 +74,13 @@
                                     {% endif %}
                                 {% endfor %}
                             </div>
-                            <a class="carousel-control-prev bg-dark" href="#carouselReceivedInvitations" role="button" data-slide="prev">
+                            <a class="carousel-control-prev bg-dark" href="#carouselReceivedInvitations" role="button"
+                               data-slide="prev">
                                 <span class="carousel-control-prev-icon" style="color: black" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next bg-dark" href="#carouselReceivedInvitations" role="button" data-slide="next">
+                            <a class="carousel-control-next bg-dark" href="#carouselReceivedInvitations" role="button"
+                               data-slide="next">
                                 <span class="carousel-control-next-icon" style="color: black" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -101,11 +104,13 @@
                                     {% endif %}
                                 {% endfor %}
                             </div>
-                            <a class="carousel-control-prev bg-dark" href="#carouselReceivedInvitations" role="button" data-slide="prev">
+                            <a class="carousel-control-prev bg-dark" href="#carouselReceivedInvitations" role="button"
+                               data-slide="prev">
                                 <span class="carousel-control-prev-icon" style="color: black" aria-hidden="true"></span>
                                 <span class="sr-only">Previous</span>
                             </a>
-                            <a class="carousel-control-next bg-dark" href="#carouselReceivedInvitations" role="button" data-slide="next">
+                            <a class="carousel-control-next bg-dark" href="#carouselReceivedInvitations" role="button"
+                               data-slide="next">
                                 <span class="carousel-control-next-icon" style="color: black" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
@@ -119,6 +124,47 @@
     {% else %}
 
     {% endif %}
+    <div class="modal fade" id="commentPostModal" tabindex="-1" role="dialog"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <form id="comment-form" class="form-group row m-3 justify-content-end"
+                      action="" method="post">
+                    {% csrf_token %}
+                    <h3 class="col-12">{{ comment_form.comment_text.label }}</h3>
+
+                    {% render_field comment_form.comment_text class="form-control col-12" rows="3" aria-label="Comment" %}
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">{% trans 'Close' %}</button>
+                        <input class="btn btn-primary" type="submit" value="{% trans 'Comment' %}">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        function commentModal(postid) {
+            var modal = $('#commentPostModal');
+            modal.modal('show');
+            $('#comment-form').attr('action', '/posts/' + postid + '/comment/');
+        }
+
+        $('#comment-form').submit(function () {
+            var form = $('#comment-form');
+            $.ajax({
+                url: form.attr("action"),
+                type: form.attr("method"),
+                data: form.serialize(),
+                complete: function (xhr, statusText) {
+                    location.reload()
+                }
+            });
+            return false;
+        });
+    </script>
 
 {% endblock body %}
     
