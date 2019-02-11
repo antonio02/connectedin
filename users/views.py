@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import NewUserForm, UserLoginForm, ChangePasswordForm, DeactivateProfileForm
 from django.views.generic.base import View
@@ -16,6 +17,7 @@ from django.db import transaction
 @login_required
 def logout(request):
     django_logout(request)
+    messages.success(request, _('Logout successfully'))
     return redirect('index')
 
 
@@ -44,6 +46,7 @@ class SignUpView(View):
             profile.user = user
             profile.save()
 
+            messages.success(request, _('Account created'))
             return redirect('login')
 
         return render(request, self.template_name, {
@@ -98,6 +101,7 @@ class ChangePasswordView(View):
                 user.set_password(change_form.cleaned_data['password'])
                 user.save()
                 update_session_auth_hash(request, user)
+                messages.success(request, _('Your password was changed'))
                 return redirect(profile, username=user.username)
             else:
                 change_form.add_error('old_password', _('Old password is incorrect'))
@@ -129,6 +133,7 @@ class DeactivateProfileView(View):
             request.user.is_active = False
             request.user.save()
             django_logout(request)
+            messages.success(request, _('Your profile was deactivated'))
             return redirect('login')
         else:
             return render(request, self.template_name, {
@@ -148,5 +153,6 @@ class ActivateProfileView(View):
     def post(self, request):
         request.user.is_active = True
         request.user.save()
+        messages.success(request, _('Your profile is now reactivated'))
         return redirect('index')
 
