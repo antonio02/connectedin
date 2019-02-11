@@ -30,6 +30,7 @@ def index(request):
             user__is_active=True).all()
         return render(request, 'timeline.html',
                       {'post_form': PostForm(),
+                       'user_profile': user_profile,
                        'posts': posts,
                        'received_invitations': user_profile.received_invitations.filter(
                            sender__user__is_active=True).all(),
@@ -88,6 +89,46 @@ def delete_post(request, post_id):
         post.delete()
         messages.success(request, _('Post deleted successfully'))
         return HttpResponse(status=200)
+    except Post.DoesNotExist:
+        messages.error(request, _('Post not found'))
+        return HttpResponse(status=404)
+
+@login_required
+def like_post(request, post_id):
+    try:
+        if request.user.is_superuser:
+            post = Post.objects.get(id=post_id)
+        else:
+            post = Post.objects.get(id=post_id, profile__user=request.user)
+
+        user_profile = Profile.objects.get(user=request.user)
+        if user_profile in post.likes.all():
+            messages.warning(request, _('You already liked this post'))
+            return HttpResponse(status=400)
+        else:
+            post.likes.add(user_profile)
+            messages.success(request, _('Post liked'))
+            return HttpResponse(status=200)
+    except Post.DoesNotExist:
+        messages.error(request, _('Post not found'))
+        return HttpResponse(status=404)
+
+@login_required
+def dislike_post(request, post_id):
+    try:
+        if request.user.is_superuser:
+            post = Post.objects.get(id=post_id)
+        else:
+            post = Post.objects.get(id=post_id, profile__user=request.user)
+
+        user_profile = Profile.objects.get(user=request.user)
+        if user_profile in post.likes.all():
+            post.likes.remove(user_profile)
+            messages.warning(request, _('Post disliked'))
+            return HttpResponse(status=200)
+        else:
+            messages.warning(request, _('You did not like this post'))
+            return HttpResponse(status=400)
     except Post.DoesNotExist:
         messages.error(request, _('Post not found'))
         return HttpResponse(status=404)

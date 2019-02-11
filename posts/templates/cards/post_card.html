@@ -13,7 +13,7 @@
 
 
                     <div class="dropdown-menu position-absolute dropdown-menu-right"
-                         aria-labelledby="dropdownPostOptions" >
+                         aria-labelledby="dropdownPostOptions">
                         <button data-toggle="modal" data-target="#deletePostModal{{ post.id }}"
                                 class="btn dropdown-item">
 
@@ -39,16 +39,19 @@
                             </button>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans 'Close' %}</button>
+                            <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">{% trans 'Close' %}</button>
                             <button onclick="call_url('{% url 'delete_post' post.id %}')"
-                                    type="button" class="btn btn-danger" data-dismiss="modal">{% trans 'Delete' %}</button>
+                                    type="button" class="btn btn-danger"
+                                    data-dismiss="modal">{% trans 'Delete' %}</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <img alt="{% blocktrans with name=post.profile.user.get_full_name %}Profile picture of {{ name }}{% endblocktrans %}"
-                 src="{{ post.profile.photo.url }}" class="img-thumbnail" style="width: 50px; height: 50px; object-fit: cover">
+                 src="{{ post.profile.photo.url }}" class="img-thumbnail"
+                 style="width: 50px; height: 50px; object-fit: cover">
             <div class="d-flex flex-column ml-3">
                 <a href="{% url 'profile' post.profile.user.username %}">
                     <h4 class="card-title d-inline m-0">{{ post.profile.user.get_full_name }}</h4>
@@ -60,10 +63,28 @@
         <hr>
         <div class="d-flex flex-column pb-3 pl-3 pr-3">
             <p class="card-text">{{ post.post_text }}</p>
-            {% if post.image %}
-                <img src="{{ post.image.url }}" style="max-width: 100%">
-            {% endif %}
-
         </div>
+        {% if post.image %}
+            <img src="{{ post.image.url }}" style="max-width: 100%">
+        {% endif %}
+    {% if post.likes.all %}
+        <p class="text-primary mx-3 my-1">{{ post.likes.count }} likes</p>
+    {% endif %}
+        <hr class="m-0">
+        {% if user.is_authenticated %}
+            <div class="btn-group m-2">
+                {% if user_profile in post.likes.all %}
+
+                    <button onclick="call_url('{% url 'dislike_post' post.id %}')"
+                            type="button" class="btn btn-outline-primary"
+                            data-dismiss="modal">{% trans 'Dislike' %}</button>
+
+                {% else %}
+                    <button onclick="call_url('{% url 'like_post' post.id %}')"
+                            type="button" class="btn btn-primary" data-dismiss="modal">{% trans 'Like' %}</button>
+                {% endif %}
+
+            </div>
+        {% endif %}
     </div>
 </div>

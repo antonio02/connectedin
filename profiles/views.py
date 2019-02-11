@@ -23,7 +23,9 @@ def profile(request, username, profile=None, user_profile=None):
 
     if request.user.is_authenticated:
         if request.user.username == username:
-            return render(request, 'profile.html', {'profile': profile, 'posts': posts})
+            return render(request, 'profile.html', {'profile': profile,
+                                                    'user_profile': Profile.objects.get(user=request.user),
+                                                    'posts': posts})
 
         friendship = 0
         invitation = None
@@ -44,7 +46,8 @@ def profile(request, username, profile=None, user_profile=None):
         elif profile.contacts.filter(user=request.user).exists():
             friendship = 3
 
-        return render(request, 'profile.html', {'profile': profile,
+        return render(request, 'profile.html', {'user_profile': Profile.objects.get(user=request.user),
+                                                'profile': profile,
                                                 'friendship': friendship,
                                                 'invitation': invitation,
                                                 'posts': posts})
