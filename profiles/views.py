@@ -16,7 +16,7 @@ def profile(request, username, profile=None, user_profile=None):
     if profile is None:
         profile = Profile.objects.get(user=User.objects.get(username=username))
 
-    posts = profile.posts.all()
+    posts = profile.posts.order_by('-post_date').all()
     paginador = Paginator(posts, 10)
     page = request.GET.get('page')
     posts = paginador.get_page(page)
