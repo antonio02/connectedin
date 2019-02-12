@@ -1,0 +1,36 @@
+{% load i18n %}
+
+<div class="card w-100" style="max-width: 40rem">
+    <div class="card-body p-0">
+        <div class="d-flex flex-row align-items-center pt-3 pl-3 pr-3">
+
+            <img alt="{% blocktrans with name=post.profile.user.get_full_name %}Profile picture of {{ name }}{% endblocktrans %}"
+                 src="{{ post.profile.photo.url }}" class="img-thumbnail"
+                 style="width: 50px; height: 50px; object-fit: cover">
+            <div class="d-flex flex-column ml-3">
+                <a href="{% url 'profile' post.profile.user.username %}">
+                    <h4 class="card-title d-inline m-0">{{ post.profile.user.get_full_name }}</h4>
+                </a>
+                <span class="text-muted">{{ post.post_date }}</span>
+            </div>
+
+        </div>
+        <hr>
+        <div class="d-flex flex-column pb-3 pl-3 pr-3">
+            <p class="card-text">{{ post.post_text }}</p>
+        </div>
+        {% if post.image %}
+            <img src="{{ post.image.url }}" style="max-width: 100%">
+        {% endif %}
+        <hr class="m-0">
+        <div class="d-flex flex-row justify-content-between">
+            {% if post.likes.all %}
+                <p class="text-primary mx-3 my-1">{{ post.likes.count }} {% trans 'Likes' %}</p>
+            {% endif %}
+            {% if post.comment_set.all %}
+                <p class="text-primary mx-3 my-1">{{ post.comment_set.count }} {% trans 'Comments' %}</p>
+            {% endif %}
+        </div>
+
+    </div>
+</div>

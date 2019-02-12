@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import new_post, delete_post, like_post, dislike_post, comment_post
+from .views import (new_post, delete_post,
+                    like_post, dislike_post,
+                    comment_post, share_post)
 
 urlpatterns = [
     path('new/', new_post, name='new_post'),
@@ -7,4 +9,5 @@ urlpatterns = [
     path('<int:post_id>/like/', like_post, name='like_post'),
     path('<int:post_id>/dislike/', dislike_post, name='dislike_post'),
     path('<int:post_id>/comment/', comment_post, name='comment_post'),
+    path('<int:post_id>/share/', share_post, name='share_post'),
 ]

@@ -2,6 +2,9 @@
 
 <div class="card mb-4 w-100" style="max-width: 40rem">
     <div class="card-body p-0">
+        {% if post.is_shared_post %}
+            <span class="fa fa-share badge badge-primary m-2">&#x27a4; {% trans 'Shared' %}</span>
+        {% endif %}
         <div class="d-flex flex-row align-items-center pt-3 pl-3 pr-3">
 
             {% if request.user.username == post.profile.user.username or request.user.is_superuser %}
@@ -68,6 +71,19 @@
             <img src="{{ post.image.url }}" style="max-width: 100%">
         {% endif %}
         <hr class="m-0">
+
+        {% if post.is_shared_post %}
+            <div class="p-3" style="background-color: #eee;">
+                {% if post.post_shared %}
+
+                    {% include 'cards/inner_shared_post_card.html' with post=post.post_shared %}
+
+                {% else %}
+                    <h5 class="text-center">{% trans 'Post deleted' %}</h5>
+                {% endif %}
+            </div>
+        {% endif %}
+
         <div class="d-flex flex-row justify-content-between">
             {% if post.likes.all %}
                 <p class="text-primary mx-3 my-1">{{ post.likes.count }} {% trans 'Likes' %}</p>
@@ -76,6 +92,7 @@
                 <p class="text-primary mx-3 my-1">{{ post.comment_set.count }} {% trans 'Comments' %}</p>
             {% endif %}
         </div>
+
 
         <hr class="m-0">
         {% if user.is_authenticated %}
@@ -93,15 +110,21 @@
                 <button onclick="commentModal({{ post.id }})"
                         class="btn btn-link">{% trans 'Comment' %}
                 </button>
+                <button onclick="shareModal({{ post.id }})"
+                        class="btn btn-link">{% trans 'Share' %}
+                </button>
 
             </div>
         {% endif %}
         <ul class="list-group list-group-flush">
             {% for comment in post.comment_set.all %}
-                <div class="list-group-item d-flex flex-row">
-                    <a href="{% url 'profile' post.profile.user.username %}"
-                       class="mr-2">{{ post.profile.user.first_name }}:</a>
-                    <p>{{ comment.comment_text }}</p>
+                <div class="list-group-item d-flex flex-column py-1 px-3">
+                    <span class="text-muted" style="font-size: 0.8rem;">{{ comment.comment_date }}</span>
+                    <div class="d-flex flex-row">
+                        <a href="{% url 'profile' comment.profile.user.username %}"
+                           class="mr-2">{{ comment.profile.user.first_name }}:</a>
+                        <p>{{ comment.comment_text }}</p>
+                    </div>
                 </div>
             {% endfor %}
         </ul>

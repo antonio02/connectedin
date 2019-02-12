@@ -38,6 +38,26 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="sharePostModal" tabindex="-1" role="dialog"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <form id="share-form" class="form-group row m-3 justify-content-end"
+                          action="" method="post">
+                        {% csrf_token %}
+                        <h3 class="col-12">{{ share_form.post_text.label }}</h3>
+
+                        {% render_field share_form.post_text class="form-control col-12" rows="3" aria-label="Comment" %}
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">{% trans 'Close' %}</button>
+                            <input class="btn btn-primary" type="submit" value="{% trans 'Share' %}">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <script>
             function commentModal(postid) {
                 var modal = $('#commentPostModal');
@@ -47,6 +67,25 @@
 
             $('#comment-form').submit(function () {
                 var form = $('#comment-form');
+                $.ajax({
+                    url: form.attr("action"),
+                    type: form.attr("method"),
+                    data: form.serialize(),
+                    complete: function (xhr, statusText) {
+                        location.reload()
+                    }
+                });
+                return false;
+            });
+
+            function shareModal(postid) {
+                var modal = $('#sharePostModal');
+                modal.modal('show');
+                $('#share-form').attr('action', '/posts/' + postid + '/share/');
+            }
+
+            $('#share-form').submit(function () {
+                var form = $('#share-form');
                 $.ajax({
                     url: form.attr("action"),
                     type: form.attr("method"),

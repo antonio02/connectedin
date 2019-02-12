@@ -3,23 +3,24 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 from profiles.models import Profile
 from .models import Post
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, SharePostForm
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib import messages
+
 
 # Create your views here.
 
 def index(request):
     if request.user.is_authenticated:
         user_profile = Profile.objects.get(user=request.user)
-        posts = Post.objects.filter(Q(profile__user=request.user) | 
-        Q(profile__contacts__user=request.user),
-         ~Q(profile__blocked_contacts__user=request.user),
-         ~Q(profile__in=user_profile.blocked_contacts.all()),
-         ~Q(profile__user__is_active=False)
-        ).order_by('-post_date').all()
+        posts = Post.objects.filter(Q(profile__user=request.user) |
+                                    Q(profile__contacts__user=request.user),
+                                    ~Q(profile__blocked_contacts__user=request.user),
+                                    ~Q(profile__in=user_profile.blocked_contacts.all()),
+                                    ~Q(profile__user__is_active=False)
+                                    ).order_by('-post_date').all()
 
         paginador = Paginator(posts, 10)
         page = request.GET.get('page')
@@ -30,6 +31,7 @@ def index(request):
             user__is_active=True).all()
         return render(request, 'timeline.html',
                       {'post_form': PostForm(),
+                       'share_form': SharePostForm(),
                        'comment_form': CommentForm(),
                        'user_profile': user_profile,
                        'posts': posts,
@@ -37,8 +39,9 @@ def index(request):
                            sender__user__is_active=True).all(),
                        'sent_invitations': user_profile.sent_invitations.filter(
                            receiver__user__is_active=True).all(),
-                       'contacts': contacts},)
+                       'contacts': contacts}, )
     return render(request, 'timeline.html')
+
 
 @login_required
 def admin_timeline(request):
@@ -62,6 +65,7 @@ def admin_timeline(request):
                    'received_invitations': user_profile.received_invitations.all(),
                    'sent_invitations': user_profile.sent_invitations.all()})
 
+
 @login_required
 def new_post(request):
     if request.method == 'POST':
@@ -74,11 +78,12 @@ def new_post(request):
             messages.success(request, _('Post created successfully'))
             return redirect('index')
         else:
-            messages.error(request, _('Invalid data for new post'))
+            messages.warning(request, _('Your post need a text or a image'))
             return redirect('index')
     else:
         messages.error(request, _('Method not allowed'))
         return redirect('index')
+
 
 @login_required
 def delete_post(request, post_id):
@@ -94,13 +99,11 @@ def delete_post(request, post_id):
         messages.error(request, _('Post not found'))
         return HttpResponse(status=404)
 
+
 @login_required
 def like_post(request, post_id):
     try:
-        if request.user.is_superuser:
-            post = Post.objects.get(id=post_id)
-        else:
-            post = Post.objects.get(id=post_id, profile__user=request.user)
+        post = Post.objects.get(id=post_id)
 
         user_profile = Profile.objects.get(user=request.user)
         if user_profile in post.likes.all():
@@ -114,13 +117,11 @@ def like_post(request, post_id):
         messages.error(request, _('Post not found'))
         return HttpResponse(status=404)
 
+
 @login_required
 def dislike_post(request, post_id):
     try:
-        if request.user.is_superuser:
-            post = Post.objects.get(id=post_id)
-        else:
-            post = Post.objects.get(id=post_id, profile__user=request.user)
+        post = Post.objects.get(id=post_id)
 
         user_profile = Profile.objects.get(user=request.user)
         if user_profile in post.likes.all():
@@ -134,14 +135,12 @@ def dislike_post(request, post_id):
         messages.error(request, _('Post not found'))
         return HttpResponse(status=404)
 
+
 @login_required
 def comment_post(request, post_id):
     if request.method == 'POST':
         try:
-            if request.user.is_superuser:
-                post = Post.objects.get(id=post_id)
-            else:
-                post = Post.objects.get(id=post_id, profile__user=request.user)
+            post = Post.objects.get(id=post_id)
 
             user_profile = Profile.objects.get(user=request.user)
             comment_form = CommentForm(request.POST)
@@ -161,5 +160,35 @@ def comment_post(request, post_id):
     else:
         messages.error(request, _('Method not allowed'))
         return HttpResponse(status=405)
-    
 
+
+@login_required
+def share_post(request, post_id):
+    if request.method == 'POST':
+        try:
+            post = Post.objects.get(id=post_id)
+            if post.is_shared_post:
+                post = post.post_shared
+                if post is None:
+                    messages.warning(request, _('You cannot share a deleted post'))
+                    return HttpResponse(status=400)
+
+            user_profile = Profile.objects.get(user=request.user)
+            share_form = SharePostForm(request.POST)
+            if share_form.is_valid():
+                shared_post = share_form.save(commit=False)
+                shared_post.post_shared = post
+                shared_post.profile = user_profile
+                shared_post.is_shared_post = True
+                shared_post.save()
+                messages.success(request, _('Post shared'))
+                return HttpResponse(status=200)
+            else:
+                messages.error(request, _('Error'))
+                return HttpResponse(status=400)
+        except Post.DoesNotExist:
+            messages.error(request, _('Post not found'))
+            return HttpResponse(status=404)
+    else:
+        messages.error(request, _('Method not allowed'))
+        return HttpResponse(status=405)
